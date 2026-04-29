@@ -1,0 +1,303 @@
+/* Wireweave UI Theme - Tailwind v4 CSS-first Configuration */
+
+/* ============================================
+   @theme 블록: 유틸리티 클래스 생성용
+   - 팔레트 변수 (고정값)
+   - 시맨틱 변수 (팔레트 변수 참조)
+   ============================================ */
+@theme {
+  /* ========== 팔레트 변수 (고정값) ========== */
+
+  /* ---- Slate 계열 ---- */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* ---- Blue 계열 ---- */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+
+  /* ---- Green 계열 ---- */
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+
+  /* ---- Red 계열 ---- */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  /* ---- Yellow 계열 ---- */
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+
+  /* ---- Amber 계열 ---- */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+
+  /* ---- Violet 계열 ---- */
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6fe;
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #6d28d9;
+  --color-violet-800: #5b21b6;
+  --color-violet-900: #4c1d95;
+
+  /* ---- 기본 색상 ---- */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  /* ========== 시맨틱 변수 (팔레트 변수 참조) ========== */
+
+  /* ---- 배경 ---- */
+  --color-background: var(--color-slate-50);
+  --color-foreground: var(--color-slate-900);
+
+  /* ---- 카드 ---- */
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-slate-900);
+
+  /* ---- 팝오버 ---- */
+  --color-popover: var(--color-white);
+  --color-popover-foreground: var(--color-slate-900);
+
+  /* ---- Primary ---- */
+  --color-primary: var(--color-blue-500);
+  --color-primary-hover: var(--color-blue-600);
+  --color-primary-foreground: var(--color-white);
+
+  /* ---- Secondary ---- */
+  --color-secondary: var(--color-slate-100);
+  --color-secondary-hover: var(--color-slate-200);
+  --color-secondary-foreground: var(--color-slate-900);
+
+  /* ---- Muted ---- */
+  --color-muted: var(--color-slate-100);
+  --color-muted-foreground: var(--color-slate-500);
+
+  /* ---- Accent ---- */
+  --color-accent: var(--color-blue-50);
+  --color-accent-foreground: var(--color-slate-900);
+
+  /* ---- Destructive ---- */
+  --color-destructive: var(--color-red-500);
+  --color-destructive-hover: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+
+  /* ---- Success ---- */
+  --color-success: var(--color-green-500);
+  --color-success-hover: var(--color-green-600);
+  --color-success-foreground: var(--color-white);
+
+  /* ---- Warning ---- */
+  --color-warning: var(--color-yellow-500);
+  --color-warning-hover: var(--color-yellow-600);
+  --color-warning-foreground: var(--color-slate-900);
+
+  /* ---- Border & Input ---- */
+  --color-border: var(--color-slate-200);
+  --color-border-hover: var(--color-slate-300);
+  --color-input: var(--color-slate-200);
+  --color-input-focus: var(--color-blue-500);
+
+  /* ---- Ring (Focus) ---- */
+  --color-ring: var(--color-blue-500);
+  --color-ring-offset: var(--color-white);
+
+  /* ---- Sidebar ---- */
+  --color-sidebar-bg: var(--color-slate-800);
+  --color-sidebar-bg-hover: var(--color-slate-700);
+  --color-sidebar-text: var(--color-slate-200);
+  --color-sidebar-text-muted: var(--color-slate-400);
+
+  /* ---- Text ---- */
+  --color-text-primary: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-600);
+  --color-text-muted: var(--color-slate-500);
+  --color-text-placeholder: var(--color-slate-400);
+
+  /* ========== Border Radius ========== */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ========== Shadows ========== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   다크 모드 오버라이드
+   - .dark 클래스가 적용되면 시맨틱 변수 값 변경
+   - prefers-color-scheme: dark 시 자동 적용 (단, .light 클래스가 명시적으로 붙은 경우 라이트 강제 유지)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-background: var(--color-slate-900);
+    --color-foreground: var(--color-slate-50);
+    --color-card: var(--color-slate-800);
+    --color-card-foreground: var(--color-slate-50);
+    --color-popover: var(--color-slate-800);
+    --color-popover-foreground: var(--color-slate-50);
+    --color-primary: var(--color-blue-400);
+    --color-primary-hover: var(--color-blue-500);
+    --color-primary-foreground: var(--color-slate-900);
+    --color-secondary: var(--color-slate-700);
+    --color-secondary-hover: var(--color-slate-600);
+    --color-secondary-foreground: var(--color-slate-50);
+    --color-muted: var(--color-slate-700);
+    --color-muted-foreground: var(--color-slate-400);
+    --color-accent: var(--color-slate-700);
+    --color-accent-foreground: var(--color-slate-50);
+    --color-destructive: var(--color-red-400);
+    --color-destructive-hover: var(--color-red-500);
+    --color-destructive-foreground: var(--color-slate-900);
+    --color-success: var(--color-green-400);
+    --color-success-hover: var(--color-green-500);
+    --color-success-foreground: var(--color-slate-900);
+    --color-warning: var(--color-yellow-400);
+    --color-warning-hover: var(--color-yellow-500);
+    --color-warning-foreground: var(--color-slate-900);
+    --color-border: var(--color-slate-700);
+    --color-border-hover: var(--color-slate-600);
+    --color-input: var(--color-slate-700);
+    --color-input-focus: var(--color-blue-400);
+    --color-ring: var(--color-blue-400);
+    --color-ring-offset: var(--color-slate-900);
+    --color-sidebar-bg: var(--color-slate-950);
+    --color-sidebar-bg-hover: var(--color-slate-800);
+    --color-sidebar-text: var(--color-slate-200);
+    --color-sidebar-text-muted: var(--color-slate-500);
+    --color-text-primary: var(--color-slate-50);
+    --color-text-secondary: var(--color-slate-300);
+    --color-text-muted: var(--color-slate-400);
+    --color-text-placeholder: var(--color-slate-500);
+  }
+}
+
+.dark {
+  /* ---- 배경 ---- */
+  --color-background: var(--color-slate-900);
+  --color-foreground: var(--color-slate-50);
+
+  /* ---- 카드 ---- */
+  --color-card: var(--color-slate-800);
+  --color-card-foreground: var(--color-slate-50);
+
+  /* ---- 팝오버 ---- */
+  --color-popover: var(--color-slate-800);
+  --color-popover-foreground: var(--color-slate-50);
+
+  /* ---- Primary ---- */
+  --color-primary: var(--color-blue-400);
+  --color-primary-hover: var(--color-blue-500);
+  --color-primary-foreground: var(--color-slate-900);
+
+  /* ---- Secondary ---- */
+  --color-secondary: var(--color-slate-700);
+  --color-secondary-hover: var(--color-slate-600);
+  --color-secondary-foreground: var(--color-slate-50);
+
+  /* ---- Muted ---- */
+  --color-muted: var(--color-slate-700);
+  --color-muted-foreground: var(--color-slate-400);
+
+  /* ---- Accent ---- */
+  --color-accent: var(--color-slate-700);
+  --color-accent-foreground: var(--color-slate-50);
+
+  /* ---- Destructive ---- */
+  --color-destructive: var(--color-red-400);
+  --color-destructive-hover: var(--color-red-500);
+  --color-destructive-foreground: var(--color-slate-900);
+
+  /* ---- Success ---- */
+  --color-success: var(--color-green-400);
+  --color-success-hover: var(--color-green-500);
+  --color-success-foreground: var(--color-slate-900);
+
+  /* ---- Warning ---- */
+  --color-warning: var(--color-yellow-400);
+  --color-warning-hover: var(--color-yellow-500);
+  --color-warning-foreground: var(--color-slate-900);
+
+  /* ---- Border & Input ---- */
+  --color-border: var(--color-slate-700);
+  --color-border-hover: var(--color-slate-600);
+  --color-input: var(--color-slate-700);
+  --color-input-focus: var(--color-blue-400);
+
+  /* ---- Ring (Focus) ---- */
+  --color-ring: var(--color-blue-400);
+  --color-ring-offset: var(--color-slate-900);
+
+  /* ---- Sidebar ---- */
+  --color-sidebar-bg: var(--color-slate-950);
+  --color-sidebar-bg-hover: var(--color-slate-800);
+  --color-sidebar-text: var(--color-slate-200);
+  --color-sidebar-text-muted: var(--color-slate-500);
+
+  /* ---- Text ---- */
+  --color-text-primary: var(--color-slate-50);
+  --color-text-secondary: var(--color-slate-300);
+  --color-text-muted: var(--color-slate-400);
+  --color-text-placeholder: var(--color-slate-500);
+}
