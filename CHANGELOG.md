@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 2026-04-29
+
+### Added
+- `./styles/theme` sub-export exposing raw `theme.css` source so consumer apps can register `@theme` tokens with their own Tailwind v4 build (required for `bg-foreground`, `text-muted-foreground` 류 시맨틱 utility 생성).
+- `src/styles/theme.css` 를 npm tarball `files` 에 포함.
+
 ## [0.2.0] - 2026-04-29
 
 ### Initial release
