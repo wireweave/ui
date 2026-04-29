@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Publish Initial Beta
+      - name: Publish Initial Release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --tag beta --access public
+        run: npm publish --access public
