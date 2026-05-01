@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.4.0](https://github.com/wireweave/ui/compare/v0.4.0-beta.0...v0.4.0) (2026-05-01)
+
 ## 0.4.0-beta.0 (2026-05-01)
 
 ### Features
