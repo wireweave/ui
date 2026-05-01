@@ -209,3 +209,16 @@ export {
 // ============================================
 
 export { CodeBlock, CodeBlockHeader } from './components/code-block';
+
+// ============================================
+// Theme System
+// ============================================
+
+export {
+  ThemeProvider,
+  useTheme,
+  ThemeToggle,
+} from './components/theme';
+export type { ThemeMode, ResolvedTheme } from './components/theme';
+
+// `getThemeInitScript` 는 server-safe 전용 entry — `import { getThemeInitScript } from '@wireweave/ui/server'`

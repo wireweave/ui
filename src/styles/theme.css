@@ -69,6 +69,18 @@
   --color-yellow-800: #854d0e;
   --color-yellow-900: #713f12;
 
+  /* ---- Orange 계열 ---- */
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
   /* ---- Amber 계열 ---- */
   --color-amber-50: #fffbeb;
   --color-amber-100: #fef3c7;
@@ -98,7 +110,7 @@
   --color-black: #000000;
   --color-transparent: transparent;
 
-  /* ========== 시맨틱 변수 (팔레트 변수 참조) ========== */
+  /* ========== 시맨틱 변수 (팔레트 변수 참조, 라이트 기본값) ========== */
 
   /* ---- 배경 ---- */
   --color-background: var(--color-slate-50);
@@ -155,11 +167,22 @@
   --color-ring: var(--color-blue-500);
   --color-ring-offset: var(--color-white);
 
-  /* ---- Sidebar ---- */
-  --color-sidebar-bg: var(--color-slate-800);
-  --color-sidebar-bg-hover: var(--color-slate-700);
-  --color-sidebar-text: var(--color-slate-200);
-  --color-sidebar-text-muted: var(--color-slate-400);
+  /* ----------------------------------------
+     Sidebar — page background 와 항상 반대 톤을 유지하는 인버전 토큰.
+     - 라이트 페이지(밝은 bg) → 다크 사이드바 (deep slate)
+     - 다크 페이지(어두운 bg) → 라이트 사이드바 (pale slate)
+     컴포넌트는 시맨틱 토큰만 참조하며 팔레트 변수에 직접 의존하지 않는다.
+     ---------------------------------------- */
+  --color-sidebar: var(--color-slate-800);
+  --color-sidebar-hover: var(--color-slate-700);
+  --color-sidebar-foreground: var(--color-slate-50);
+  --color-sidebar-foreground-muted: var(--color-slate-400);
+  --color-sidebar-active: color-mix(in oklab, var(--color-blue-500) 20%, transparent);
+  --color-sidebar-active-foreground: var(--color-white);
+  --color-sidebar-border: var(--color-slate-700);
+  --color-sidebar-overlay: color-mix(in oklab, var(--color-slate-900) 75%, transparent);
+  --color-sidebar-logo-from: var(--color-blue-500);
+  --color-sidebar-logo-to: var(--color-violet-500);
 
   /* ---- Text ---- */
   --color-text-primary: var(--color-slate-900);
@@ -185,9 +208,9 @@
 }
 
 /* ============================================
-   다크 모드 오버라이드
-   - .dark 클래스가 적용되면 시맨틱 변수 값 변경
-   - prefers-color-scheme: dark 시 자동 적용 (단, .light 클래스가 명시적으로 붙은 경우 라이트 강제 유지)
+   다크 모드 오버라이드 (시맨틱만 — 팔레트는 불변)
+   - .dark 클래스 또는 prefers-color-scheme: dark 일 때 적용
+   - .light 가 명시적으로 붙으면 OS 선호와 무관하게 라이트 강제
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
@@ -222,10 +245,19 @@
     --color-input-focus: var(--color-blue-400);
     --color-ring: var(--color-blue-400);
     --color-ring-offset: var(--color-slate-900);
-    --color-sidebar-bg: var(--color-slate-950);
-    --color-sidebar-bg-hover: var(--color-slate-800);
-    --color-sidebar-text: var(--color-slate-200);
-    --color-sidebar-text-muted: var(--color-slate-500);
+
+    /* Sidebar — 라이트 톤으로 인버전 (다크 페이지 대비 밝은 사이드바) */
+    --color-sidebar: var(--color-slate-100);
+    --color-sidebar-hover: var(--color-slate-200);
+    --color-sidebar-foreground: var(--color-slate-900);
+    --color-sidebar-foreground-muted: var(--color-slate-500);
+    --color-sidebar-active: color-mix(in oklab, var(--color-blue-500) 18%, transparent);
+    --color-sidebar-active-foreground: var(--color-blue-700);
+    --color-sidebar-border: var(--color-slate-300);
+    --color-sidebar-overlay: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+    --color-sidebar-logo-from: var(--color-blue-500);
+    --color-sidebar-logo-to: var(--color-violet-500);
+
     --color-text-primary: var(--color-slate-50);
     --color-text-secondary: var(--color-slate-300);
     --color-text-muted: var(--color-slate-400);
@@ -234,68 +266,50 @@
 }
 
 .dark {
-  /* ---- 배경 ---- */
   --color-background: var(--color-slate-900);
   --color-foreground: var(--color-slate-50);
-
-  /* ---- 카드 ---- */
   --color-card: var(--color-slate-800);
   --color-card-foreground: var(--color-slate-50);
-
-  /* ---- 팝오버 ---- */
   --color-popover: var(--color-slate-800);
   --color-popover-foreground: var(--color-slate-50);
-
-  /* ---- Primary ---- */
   --color-primary: var(--color-blue-400);
   --color-primary-hover: var(--color-blue-500);
   --color-primary-foreground: var(--color-slate-900);
-
-  /* ---- Secondary ---- */
   --color-secondary: var(--color-slate-700);
   --color-secondary-hover: var(--color-slate-600);
   --color-secondary-foreground: var(--color-slate-50);
-
-  /* ---- Muted ---- */
   --color-muted: var(--color-slate-700);
   --color-muted-foreground: var(--color-slate-400);
-
-  /* ---- Accent ---- */
   --color-accent: var(--color-slate-700);
   --color-accent-foreground: var(--color-slate-50);
-
-  /* ---- Destructive ---- */
   --color-destructive: var(--color-red-400);
   --color-destructive-hover: var(--color-red-500);
   --color-destructive-foreground: var(--color-slate-900);
-
-  /* ---- Success ---- */
   --color-success: var(--color-green-400);
   --color-success-hover: var(--color-green-500);
   --color-success-foreground: var(--color-slate-900);
-
-  /* ---- Warning ---- */
   --color-warning: var(--color-yellow-400);
   --color-warning-hover: var(--color-yellow-500);
   --color-warning-foreground: var(--color-slate-900);
-
-  /* ---- Border & Input ---- */
   --color-border: var(--color-slate-700);
   --color-border-hover: var(--color-slate-600);
   --color-input: var(--color-slate-700);
   --color-input-focus: var(--color-blue-400);
-
-  /* ---- Ring (Focus) ---- */
   --color-ring: var(--color-blue-400);
   --color-ring-offset: var(--color-slate-900);
 
-  /* ---- Sidebar ---- */
-  --color-sidebar-bg: var(--color-slate-950);
-  --color-sidebar-bg-hover: var(--color-slate-800);
-  --color-sidebar-text: var(--color-slate-200);
-  --color-sidebar-text-muted: var(--color-slate-500);
+  /* Sidebar — 라이트 톤으로 인버전 */
+  --color-sidebar: var(--color-slate-100);
+  --color-sidebar-hover: var(--color-slate-200);
+  --color-sidebar-foreground: var(--color-slate-900);
+  --color-sidebar-foreground-muted: var(--color-slate-500);
+  --color-sidebar-active: color-mix(in oklab, var(--color-blue-500) 18%, transparent);
+  --color-sidebar-active-foreground: var(--color-blue-700);
+  --color-sidebar-border: var(--color-slate-300);
+  --color-sidebar-overlay: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+  --color-sidebar-logo-from: var(--color-blue-500);
+  --color-sidebar-logo-to: var(--color-violet-500);
 
-  /* ---- Text ---- */
   --color-text-primary: var(--color-slate-50);
   --color-text-secondary: var(--color-slate-300);
   --color-text-muted: var(--color-slate-400);
