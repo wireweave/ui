@@ -7,13 +7,14 @@ import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
 /**
  * Wireweave UI Sidebar
- * 항상 다크 톤을 유지하므로 sidebar 전용 시맨틱 토큰 사용
- * (--color-sidebar-bg / -hover / -text / -text-muted)
+ *
+ * 페이지 배경과 항상 반대 톤을 유지한다.
+ * - 라이트 페이지(밝은 bg) → 다크 사이드바
+ * - 다크 페이지(어두운 bg) → 라이트 사이드바
+ *
+ * 모든 색상은 `--color-sidebar-*` 시맨틱 토큰을 통해서만 적용된다.
+ * 컴포넌트 내부에서 팔레트 변수, hex, Tailwind 팔레트 utility 직접 사용 금지.
  */
-
-// ============================================
-// Sidebar Context
-// ============================================
 
 interface SidebarContextValue {
   collapsed: boolean;
@@ -32,10 +33,6 @@ export function useSidebar() {
   return context;
 }
 
-// ============================================
-// Sidebar Provider
-// ============================================
-
 interface SidebarProviderProps {
   children: React.ReactNode;
   defaultCollapsed?: boolean;
@@ -51,10 +48,6 @@ export function SidebarProvider({ children, defaultCollapsed = false }: SidebarP
     </SidebarContext.Provider>
   );
 }
-
-// ============================================
-// Sidebar Root
-// ============================================
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   collapsedWidth?: string;
@@ -79,16 +72,12 @@ export function Sidebar({
       )}
       {...props}
     >
-      <div className="flex flex-1 flex-col bg-[var(--color-sidebar-bg)] rounded-xl m-2">
+      <div className="flex flex-1 flex-col rounded-xl m-2 bg-[var(--color-sidebar)] text-[var(--color-sidebar-foreground)]">
         {children}
       </div>
     </aside>
   );
 }
-
-// ============================================
-// Sidebar Mobile Overlay
-// ============================================
 
 interface SidebarMobileProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -102,19 +91,15 @@ export function SidebarMobile({ className, children, ...props }: SidebarMobilePr
   return (
     <div className={cn('fixed inset-0 z-50 lg:hidden', className)} {...props}>
       <div
-        className="fixed inset-0 bg-[var(--color-slate-900)]/80"
+        className="fixed inset-0 bg-[var(--color-sidebar-overlay)]"
         onClick={() => setMobileOpen(false)}
       />
-      <div className="fixed inset-y-0 left-0 flex w-full max-w-xs flex-col bg-[var(--color-sidebar-bg)]">
+      <div className="fixed inset-y-0 left-0 flex w-full max-w-xs flex-col bg-[var(--color-sidebar)] text-[var(--color-sidebar-foreground)]">
         {children}
       </div>
     </div>
   );
 }
-
-// ============================================
-// Sidebar Header
-// ============================================
 
 interface SidebarHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   logo?: React.ReactNode;
@@ -142,18 +127,26 @@ export function SidebarHeader({
       {...props}
     >
       {logo || (
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[var(--color-blue-500)] to-[var(--color-violet-500)] text-white text-sm font-bold flex-shrink-0">
+        <div
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold flex-shrink-0 text-[var(--color-primary-foreground)]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to bottom right, var(--color-sidebar-logo-from), var(--color-sidebar-logo-to))',
+          }}
+        >
           {title ? title.charAt(0).toUpperCase() : 'W'}
         </div>
       )}
       {!collapsed && title && (
-        <span className="text-white font-semibold text-base">{title}</span>
+        <span className="text-[var(--color-sidebar-foreground)] font-semibold text-base">
+          {title}
+        </span>
       )}
       {children}
       {showCollapseButton && !collapsed && (
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="ml-auto p-1.5 rounded-md text-[var(--color-sidebar-text-muted)] hover:bg-[var(--color-sidebar-bg-hover)] hover:text-white transition-colors"
+          className="ml-auto p-1.5 rounded-md text-[var(--color-sidebar-foreground-muted)] hover:bg-[var(--color-sidebar-hover)] hover:text-[var(--color-sidebar-foreground)] transition-colors"
           title="Collapse sidebar"
         >
           <PanelLeftClose className="h-4 w-4" />
@@ -162,7 +155,7 @@ export function SidebarHeader({
       {showCollapseButton && collapsed && (
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute right-0 translate-x-1/2 p-1.5 rounded-md bg-[var(--color-sidebar-bg-hover)] text-[var(--color-sidebar-text)] hover:bg-[var(--color-slate-600)] hover:text-white transition-colors"
+          className="absolute right-0 translate-x-1/2 p-1.5 rounded-md bg-[var(--color-sidebar-hover)] text-[var(--color-sidebar-foreground)] hover:bg-[var(--color-sidebar-active)] transition-colors"
           title="Expand sidebar"
         >
           <PanelLeftOpen className="h-4 w-4" />
@@ -171,10 +164,6 @@ export function SidebarHeader({
     </div>
   );
 }
-
-// ============================================
-// Sidebar Content
-// ============================================
 
 interface SidebarContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -186,10 +175,6 @@ export function SidebarContent({ className, children, ...props }: SidebarContent
   );
 }
 
-// ============================================
-// Sidebar Section
-// ============================================
-
 interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
 }
@@ -200,7 +185,7 @@ export function SidebarSection({ className, title, children, ...props }: Sidebar
   return (
     <div className={cn('py-2', className)} {...props}>
       {title && !collapsed && (
-        <p className="px-3 mb-2 text-[11px] font-semibold text-[var(--color-sidebar-text-muted)] uppercase tracking-wider">
+        <p className="px-3 mb-2 text-[11px] font-semibold text-[var(--color-sidebar-foreground-muted)] uppercase tracking-wider">
           {title}
         </p>
       )}
@@ -209,17 +194,14 @@ export function SidebarSection({ className, title, children, ...props }: Sidebar
   );
 }
 
-// ============================================
-// Sidebar Item
-// ============================================
-
 const sidebarItemVariants = cva(
   'flex items-center rounded-md px-3 py-2.5 text-sm font-medium transition-all',
   {
     variants: {
       active: {
-        true: 'bg-[var(--color-blue-500)]/20 text-white',
-        false: 'text-[var(--color-sidebar-text)] hover:bg-[var(--color-sidebar-bg-hover)]',
+        true: 'bg-[var(--color-sidebar-active)] text-[var(--color-sidebar-active-foreground)]',
+        false:
+          'text-[var(--color-sidebar-foreground)] hover:bg-[var(--color-sidebar-hover)]',
       },
     },
     defaultVariants: {
@@ -263,10 +245,6 @@ export function SidebarItem({
   );
 }
 
-// ============================================
-// Sidebar Footer
-// ============================================
-
 interface SidebarFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function SidebarFooter({ className, children, ...props }: SidebarFooterProps) {
@@ -276,10 +254,6 @@ export function SidebarFooter({ className, children, ...props }: SidebarFooterPr
     </div>
   );
 }
-
-// ============================================
-// Sidebar User
-// ============================================
 
 interface SidebarUserProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
@@ -298,44 +272,49 @@ export function SidebarUser({
 }: SidebarUserProps) {
   const { collapsed } = useSidebar();
 
-  const initials = avatarFallback || name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+  const initials =
+    avatarFallback ||
+    name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
 
   if (collapsed) return null;
 
   return (
     <div
-      className={cn('flex items-center gap-3 px-3 py-3 border-t border-[var(--color-sidebar-bg-hover)]', className)}
+      className={cn(
+        'flex items-center gap-3 px-3 py-3 border-t border-[var(--color-sidebar-border)]',
+        className
+      )}
       {...props}
     >
       {avatarUrl ? (
-        <img
-          src={avatarUrl}
-          alt={name}
-          className="h-9 w-9 rounded-full object-cover"
-        />
+        <img src={avatarUrl} alt={name} className="h-9 w-9 rounded-full object-cover" />
       ) : (
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-blue-500)] to-[var(--color-violet-500)] text-sm font-medium text-white">
+        <div
+          className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-medium text-[var(--color-primary-foreground)]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to bottom right, var(--color-sidebar-logo-from), var(--color-sidebar-logo-to))',
+          }}
+        >
           {initials}
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-white truncate">{name}</p>
+        <p className="text-sm font-medium text-[var(--color-sidebar-foreground)] truncate">
+          {name}
+        </p>
         {email && name !== email && (
-          <p className="text-xs text-[var(--color-sidebar-text-muted)] truncate">{email}</p>
+          <p className="text-xs text-[var(--color-sidebar-foreground-muted)] truncate">{email}</p>
         )}
       </div>
     </div>
   );
 }
-
-// ============================================
-// Main Content Wrapper
-// ============================================
 
 interface SidebarMainProps extends React.HTMLAttributes<HTMLDivElement> {
   collapsedWidth?: string;
@@ -365,10 +344,6 @@ export function SidebarMain({
   );
 }
 
-// ============================================
-// Mobile Header
-// ============================================
-
 interface SidebarMobileHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   menuIcon?: React.ReactNode;
@@ -397,7 +372,9 @@ export function SidebarMobileHeader({
       >
         {menuIcon}
       </button>
-      {title && <span className="text-base font-semibold text-[var(--color-foreground)]">{title}</span>}
+      {title && (
+        <span className="text-base font-semibold text-[var(--color-foreground)]">{title}</span>
+      )}
       {children}
     </div>
   );
