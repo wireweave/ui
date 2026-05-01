@@ -16,6 +16,7 @@ export default defineConfig({
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
         spec: resolve(__dirname, 'src/spec/index.ts'),
+        server: resolve(__dirname, 'src/server.ts'),
       },
       name: 'WireweaveUI',
       formats: ['es', 'cjs'],
@@ -25,7 +26,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
-        banner: '"use client";',
+        banner: (chunk) => (chunk.name === 'server' ? '' : '"use client";'),
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',

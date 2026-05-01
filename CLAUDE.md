@@ -34,6 +34,25 @@ Wireweave 디자인시스템 단일 소스. dashboard / admin / 기타 wireweave
 | `--color-input` | `slate-200` | 입력 보더 |
 | `--color-ring` | `blue-500` | focus 링 |
 
+### Sidebar 토큰 (페이지 배경 ↔ 사이드바 인버전)
+
+`Sidebar` 는 페이지 배경과 항상 **반대 톤**을 유지한다. 라이트 페이지에서는 어두운 사이드바, 다크 페이지에서는 밝은 사이드바. 모든 사이드바 색은 다음 토큰을 통해서만 적용한다 — 컴포넌트 내부에서 팔레트 변수, hex, Tailwind 팔레트 utility 직접 사용 금지.
+
+| 시맨틱 토큰 | 라이트 매핑 | 다크 매핑 (인버전) | 용도 |
+|------------|-----------|-------------------|------|
+| `--color-sidebar` | `slate-800` | `slate-100` | 사이드바 배경 |
+| `--color-sidebar-hover` | `slate-700` | `slate-200` | 아이템 hover bg |
+| `--color-sidebar-foreground` | `slate-50` | `slate-900` | 메인 텍스트 |
+| `--color-sidebar-foreground-muted` | `slate-400` | `slate-500` | 섹션 타이틀 / 서브텍스트 |
+| `--color-sidebar-active` | `blue-500 @ 20%` | `blue-500 @ 18%` | 활성 아이템 bg (color-mix) |
+| `--color-sidebar-active-foreground` | `white` | `blue-700` | 활성 아이템 텍스트 |
+| `--color-sidebar-border` | `slate-700` | `slate-300` | 구분선 (사이드바 내부) |
+| `--color-sidebar-overlay` | `slate-900 @ 75%` | `slate-900 @ 60%` | 모바일 사이드바 backdrop |
+| `--color-sidebar-logo-from` | `blue-500` | `blue-500` | 로고 그라디언트 시작 |
+| `--color-sidebar-logo-to` | `violet-500` | `violet-500` | 로고 그라디언트 끝 |
+
+> 알파 값은 `color-mix(in oklab, var(--color-blue-500) 20%, transparent)` 패턴으로 표현 — Tailwind `/N` 문법은 `var()` 와 함께 동작하지 않는다.
+
 ## 다크테마 규칙
 
 다크 모드는 `.dark` 클래스가 부모에 붙거나 `prefers-color-scheme: dark` 일 때 활성.
@@ -79,10 +98,66 @@ Wireweave 디자인시스템 단일 소스. dashboard / admin / 기타 wireweave
 
 ## sub-export
 
-- `@wireweave/ui` — 메인 컴포넌트
+- `@wireweave/ui` — 메인 컴포넌트 (`'use client'`, React 컴포넌트 + 훅)
+- `@wireweave/ui/server` — server-safe 유틸리티 (`getThemeInitScript` 등 SSR 에서 호출 가능)
+- `@wireweave/ui/spec` — specification 메타포 컴포넌트
 - `@wireweave/ui/styles` — `dist/ui.css` (번들된 CSS)
 
-추후 `/spec` (specification 메타포 컴포넌트) 같은 sub-export 가 추가되면 README + 본 문서에 명시.
+> 클라이언트 컴포넌트와 server-only 유틸리티는 별도 entry 로 분리한다. 메인 entry 의 모든 청크에는 vite build 가 `'use client'` banner 를 자동 삽입하므로, SSR 에서 호출되어야 하는 함수는 `./server` entry 에 둔다.
+
+## 테마 시스템 API
+
+`src/components/theme.tsx` 가 host 앱에서 다크 모드를 제어하는 단일 진입점을 제공한다. 단일 진실 공급원은 `html` 요소의 class (`light` / `dark`).
+
+### `<ThemeProvider>`
+
+```tsx
+import { ThemeProvider } from '@wireweave/ui';
+
+<ThemeProvider defaultTheme="system" storageKey="wireweave-theme">
+  {children}
+</ThemeProvider>
+```
+
+- `defaultTheme`: `'light' | 'dark' | 'system'` (기본 `'system'`). localStorage 가 우선.
+- `storageKey`: 영속 키 (기본 `'wireweave-theme'`).
+- `system` 모드일 때 OS `prefers-color-scheme` 변경에 자동 반응.
+- SSR 안전: 초기 렌더는 `system` 가정. mount 직후 storage 와 동기화.
+
+### `useTheme()`
+
+```ts
+const { theme, resolvedTheme, setTheme } = useTheme();
+// theme: 'light' | 'dark' | 'system' (사용자 선택값)
+// resolvedTheme: 'light' | 'dark' (실제 적용 테마)
+// setTheme(next): 변경 + localStorage 저장 + html class 갱신
+```
+
+### `<ThemeToggle>`
+
+```tsx
+import { ThemeToggle } from '@wireweave/ui';
+
+<ThemeToggle />              {/* 2-way: light ↔ dark */}
+<ThemeToggle withSystem />   {/* 3-way: light → dark → system → … */}
+<ThemeToggle size="sm" />    {/* 'sm' | 'md' (기본 'md') */}
+```
+
+`<ThemeProvider>` 내부에서만 동작.
+
+### `getThemeInitScript()` — FOUC 방지
+
+Next.js 같은 SSR 환경에서 hydration 전에 html class 를 적용하려면 head 에 inline script 를 박는다. **server entry 에서 import 한다** — `@wireweave/ui` 메인 entry 는 `'use client'` 라 RSC 환경에서 호출 불가.
+
+```tsx
+import { getThemeInitScript } from '@wireweave/ui/server';
+
+<head>
+  <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
+</head>
+```
+
+storage key 를 커스텀했으면 `getThemeInitScript('my-key')` 로 동일하게 전달한다.
 
 ## 빌드 & 테스트
 
