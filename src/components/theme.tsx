@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { Moon, Sun, Monitor } from 'lucide-react';
-import { cn } from '../lib/utils';
+import * as React from 'react'
+import { Moon, Sun, Monitor } from 'lucide-react'
+import { cn } from '../lib/utils'
 
 /**
  * Wireweave UI Theme System
@@ -15,54 +15,54 @@ import { cn } from '../lib/utils';
  *   (`getThemeInitScript()` 를 사용).
  */
 
-export type ThemeMode = 'light' | 'dark' | 'system';
-export type ResolvedTheme = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark' | 'system'
+export type ResolvedTheme = 'light' | 'dark'
 
-const STORAGE_KEY = 'wireweave-theme';
+const STORAGE_KEY = 'wireweave-theme'
 
 interface ThemeContextValue {
-  theme: ThemeMode;
-  resolvedTheme: ResolvedTheme;
-  setTheme: (theme: ThemeMode) => void;
+  theme: ThemeMode
+  resolvedTheme: ResolvedTheme
+  setTheme: (theme: ThemeMode) => void
 }
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
+const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined)
 
 interface ThemeProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
   /** 초기 모드 (기본: 'system'). localStorage 가 우선. */
-  defaultTheme?: ThemeMode;
+  defaultTheme?: ThemeMode
   /** localStorage key 오버라이드 (기본 `wireweave-theme`). */
-  storageKey?: string;
+  storageKey?: string
 }
 
 function readStored(storageKey: string): ThemeMode | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined') return null
   try {
-    const value = window.localStorage.getItem(storageKey);
-    if (value === 'light' || value === 'dark' || value === 'system') return value;
+    const value = window.localStorage.getItem(storageKey)
+    if (value === 'light' || value === 'dark' || value === 'system') return value
   } catch {
     /* localStorage 접근 실패 (private mode 등) — 무시 */
   }
-  return null;
+  return null
 }
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === 'undefined') return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (typeof window === 'undefined') return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 function applyThemeClass(resolved: ResolvedTheme, mode: ThemeMode) {
-  if (typeof document === 'undefined') return;
-  const root = document.documentElement;
-  root.classList.remove('light', 'dark');
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  root.classList.remove('light', 'dark')
   if (mode === 'system') {
     /* system 모드: prefers-color-scheme 가 알아서 적용되도록 class 를 비워둔다.
        단, 이전에 강제 light 가 붙어있다가 system 으로 돌아온 경우를 대비해 위에서 제거. */
-    if (resolved === 'dark') root.classList.add('dark');
-    return;
+    if (resolved === 'dark') root.classList.add('dark')
+    return
   }
-  root.classList.add(mode);
+  root.classList.add(mode)
 }
 
 export function ThemeProvider({
@@ -70,60 +70,64 @@ export function ThemeProvider({
   defaultTheme = 'system',
   storageKey = STORAGE_KEY,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<ThemeMode>(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>('light');
+  const [theme, setThemeState] = React.useState<ThemeMode>(defaultTheme)
+  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>('light')
 
   // mount: read storage + sync class
+  // SSR hydration pattern — initial render assumes 'system', then syncs from the
+  // browser-only sources (localStorage + matchMedia) post-mount. This is the intended
+  // external-system → React sync, not a render-derived cascade.
   React.useEffect(() => {
-    const stored = readStored(storageKey) ?? defaultTheme;
-    const resolved = stored === 'system' ? getSystemTheme() : stored;
-    setThemeState(stored);
-    setResolvedTheme(resolved);
-    applyThemeClass(resolved, stored);
-  }, [defaultTheme, storageKey]);
+    const stored = readStored(storageKey) ?? defaultTheme
+    const resolved = stored === 'system' ? getSystemTheme() : stored
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setThemeState(stored)
+    setResolvedTheme(resolved)
+    applyThemeClass(resolved, stored)
+  }, [defaultTheme, storageKey])
 
   // OS 선호 변경 추적 (system 모드일 때만)
   React.useEffect(() => {
-    if (theme !== 'system') return;
-    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    if (theme !== 'system') return
+    const mql = window.matchMedia('(prefers-color-scheme: dark)')
     const onChange = () => {
-      const resolved: ResolvedTheme = mql.matches ? 'dark' : 'light';
-      setResolvedTheme(resolved);
-      applyThemeClass(resolved, 'system');
-    };
-    mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
-  }, [theme]);
+      const resolved: ResolvedTheme = mql.matches ? 'dark' : 'light'
+      setResolvedTheme(resolved)
+      applyThemeClass(resolved, 'system')
+    }
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [theme])
 
   const setTheme = React.useCallback(
     (next: ThemeMode) => {
-      const resolved = next === 'system' ? getSystemTheme() : next;
-      setThemeState(next);
-      setResolvedTheme(resolved);
-      applyThemeClass(resolved, next);
+      const resolved = next === 'system' ? getSystemTheme() : next
+      setThemeState(next)
+      setResolvedTheme(resolved)
+      applyThemeClass(resolved, next)
       try {
-        window.localStorage.setItem(storageKey, next);
+        window.localStorage.setItem(storageKey, next)
       } catch {
         /* 무시 */
       }
     },
-    [storageKey]
-  );
+    [storageKey],
+  )
 
   const value = React.useMemo(
     () => ({ theme, resolvedTheme, setTheme }),
-    [theme, resolvedTheme, setTheme]
-  );
+    [theme, resolvedTheme, setTheme],
+  )
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export function useTheme() {
-  const ctx = React.useContext(ThemeContext);
+  const ctx = React.useContext(ThemeContext)
   if (!ctx) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTheme must be used within a ThemeProvider')
   }
-  return ctx;
+  return ctx
 }
 
 // `getThemeInitScript` 는 `./theme-script.ts` (server-safe) 에 정의되어 있으며
@@ -135,8 +139,8 @@ export function useTheme() {
  */
 interface ThemeToggleProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /** light/dark/system 3-way dropdown 으로 표시할지 (기본 false: 2-way 토글). */
-  withSystem?: boolean;
-  size?: 'sm' | 'md';
+  withSystem?: boolean
+  size?: 'sm' | 'md'
 }
 
 export function ThemeToggle({
@@ -145,21 +149,21 @@ export function ThemeToggle({
   size = 'md',
   ...props
 }: ThemeToggleProps) {
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  const sizeClass = size === 'sm' ? 'h-8 w-8' : 'h-9 w-9';
-  const iconClass = size === 'sm' ? 'h-4 w-4' : 'h-[18px] w-[18px]';
+  const { theme, resolvedTheme, setTheme } = useTheme()
+  const sizeClass = size === 'sm' ? 'h-8 w-8' : 'h-9 w-9'
+  const iconClass = size === 'sm' ? 'h-4 w-4' : 'h-[18px] w-[18px]'
 
   if (!withSystem) {
-    const next: ResolvedTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
-    const label = `Switch to ${next} theme`;
+    const next: ResolvedTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
+    const label = `Switch to ${next} theme`
     return (
       <button
         type="button"
         onClick={() => setTheme(next)}
         className={cn(
-          'inline-flex items-center justify-center rounded-md text-[var(--color-foreground)] hover:bg-[var(--color-muted)] transition-colors',
+          'inline-flex items-center justify-center rounded-md text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)]',
           sizeClass,
-          className
+          className,
         )}
         title={label}
         aria-label={label}
@@ -167,24 +171,24 @@ export function ThemeToggle({
       >
         {resolvedTheme === 'dark' ? <Moon className={iconClass} /> : <Sun className={iconClass} />}
       </button>
-    );
+    )
   }
 
   // 3-way: cycle light → dark → system → light
-  const order: ThemeMode[] = ['light', 'dark', 'system'];
-  const cur = order.indexOf(theme);
-  const nextMode = order[(cur + 1) % order.length];
-  const Icon = theme === 'light' ? Sun : theme === 'dark' ? Moon : Monitor;
-  const label = `Theme: ${theme}. Switch to ${nextMode}.`;
+  const order: ThemeMode[] = ['light', 'dark', 'system']
+  const cur = order.indexOf(theme)
+  const nextMode = order[(cur + 1) % order.length]
+  const Icon = theme === 'light' ? Sun : theme === 'dark' ? Moon : Monitor
+  const label = `Theme: ${theme}. Switch to ${nextMode}.`
 
   return (
     <button
       type="button"
       onClick={() => setTheme(nextMode)}
       className={cn(
-        'inline-flex items-center justify-center rounded-md text-[var(--color-foreground)] hover:bg-[var(--color-muted)] transition-colors',
+        'inline-flex items-center justify-center rounded-md text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)]',
         sizeClass,
-        className
+        className,
       )}
       title={label}
       aria-label={label}
@@ -192,5 +196,5 @@ export function ThemeToggle({
     >
       <Icon className={iconClass} />
     </button>
-  );
+  )
 }
