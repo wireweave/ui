@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { cn } from '../lib/utils';
+import * as React from 'react'
+import { cn } from '../lib/utils'
 
 /**
  * Wireweave Specification Frontmatter Strip.
@@ -13,26 +13,24 @@ import { cn } from '../lib/utils';
  * must provide them in their own CSS layer (see docs site theme).
  */
 
-export type SpecStatus = 'STABLE' | 'BETA' | 'DRAFT' | 'DEPRECATED';
+export type SpecStatus = 'STABLE' | 'BETA' | 'DRAFT' | 'DEPRECATED'
 
 const statusToneClass: Record<SpecStatus, string> = {
   STABLE: 'text-[var(--color-signal)]',
   BETA: 'text-[var(--color-signal-soft)]',
   DRAFT: 'text-[var(--color-ink-faint)]',
   DEPRECATED: 'text-[var(--color-critical)]',
-};
-
-interface SpecStripProps extends React.HTMLAttributes<HTMLDivElement> {
-  chapter?: string;
-  section?: string;
-  revision?: string;
-  status?: SpecStatus;
-  trailing?: React.ReactNode;
 }
 
-const Dot = () => (
-  <span className="text-[var(--color-ink-faint)] select-none">·</span>
-);
+interface SpecStripProps extends React.HTMLAttributes<HTMLDivElement> {
+  chapter?: string
+  section?: string
+  revision?: string
+  status?: SpecStatus
+  trailing?: React.ReactNode
+}
+
+const Dot = () => <span className="text-[var(--color-ink-faint)] select-none">·</span>
 
 export function SpecStrip({
   className,
@@ -46,19 +44,17 @@ export function SpecStrip({
   return (
     <div
       className={cn(
-        'flex items-center h-9 px-4 sm:px-6 gap-3 text-[12px] leading-none',
-        'bg-[var(--color-paper-2)] border-b border-[var(--color-hairline)]',
+        'flex h-9 items-center gap-3 px-4 text-[12px] leading-none sm:px-6',
+        'border-b border-[var(--color-hairline)] bg-[var(--color-paper-2)]',
         'overflow-x-auto whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
         className,
       )}
       {...props}
     >
-      {chapter && (
-        <span className="font-mono text-[var(--color-ink)] tabular-nums">{chapter}</span>
-      )}
+      {chapter && <span className="font-mono text-[var(--color-ink)] tabular-nums">{chapter}</span>}
       {chapter && section && <Dot />}
       {section && (
-        <span className="font-semibold text-[var(--color-ink)] tracking-[0.05em] uppercase">
+        <span className="font-semibold tracking-[0.05em] text-[var(--color-ink)] uppercase">
           {section}
         </span>
       )}
@@ -81,5 +77,5 @@ export function SpecStrip({
         </>
       )}
     </div>
-  );
+  )
 }
