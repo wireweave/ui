@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { PageHeader, PageSection } from '../components/page-header';
-import { Button } from '../components/button';
-import { Plus } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { PageHeader, PageSection } from '../components/page-header'
+import { Button } from '../components/button'
+import { Plus } from 'lucide-react'
 
 const meta: Meta<typeof PageHeader> = {
   title: 'Layout/PageHeader',
@@ -11,28 +11,28 @@ const meta: Meta<typeof PageHeader> = {
   },
   decorators: [
     (Story) => (
-      <div className="bg-gray-50 p-6 min-h-screen">
+      <div className="min-h-screen bg-gray-50 p-6">
         <Story />
       </div>
     ),
   ],
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof PageHeader>;
+export default meta
+type Story = StoryObj<typeof PageHeader>
 
 export const Default: Story = {
   args: {
     title: 'Dashboard',
   },
-};
+}
 
 export const WithDescription: Story = {
   args: {
     title: 'API Keys',
     description: 'Manage your API keys for accessing Wireweave services',
   },
-};
+}
 
 export const WithActions: Story = {
   args: {
@@ -45,7 +45,7 @@ export const WithActions: Story = {
       </Button>
     ),
   },
-};
+}
 
 export const WithMultipleActions: Story = {
   args: {
@@ -61,15 +61,12 @@ export const WithMultipleActions: Story = {
       </>
     ),
   },
-};
+}
 
 export const PageSectionExample: StoryObj = {
   render: () => (
     <div className="space-y-8">
-      <PageHeader
-        title="Settings"
-        description="Manage your account settings and preferences"
-      />
+      <PageHeader title="Settings" description="Manage your account settings and preferences" />
       <PageSection title="Profile" description="Update your personal information">
         <div className="rounded-lg bg-white p-6 shadow">
           <p className="text-gray-600">Profile settings form would go here</p>
@@ -82,4 +79,4 @@ export const PageSectionExample: StoryObj = {
       </PageSection>
     </div>
   ),
-};
+}
