@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/tabs';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/tabs'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -21,8 +21,8 @@ export const Default: Story = {
       </TabsList>
       <TabsContent value="overview">
         <p className="text-muted-foreground">
-          Tabs are a horizontal navigation primitive used to switch between
-          panels of related content within the same view.
+          Tabs are a horizontal navigation primitive used to switch between panels of related
+          content within the same view.
         </p>
       </TabsContent>
       <TabsContent value="contacts">
@@ -32,8 +32,10 @@ export const Default: Story = {
         <p className="text-muted-foreground">Pair Tabs with cards or tables for dense layouts.</p>
       </TabsContent>
       <TabsContent value="activity">
-        <p className="text-muted-foreground">Use Tabs for content shifting, not navigation between pages.</p>
+        <p className="text-muted-foreground">
+          Use Tabs for content shifting, not navigation between pages.
+        </p>
       </TabsContent>
     </Tabs>
   ),
-};
+}

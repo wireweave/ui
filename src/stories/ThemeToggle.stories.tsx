@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider, ThemeToggle, useTheme } from '../components/theme';
+import type { Meta, StoryObj } from '@storybook/react'
+import { ThemeProvider, ThemeToggle, useTheme } from '../components/theme'
 
 /**
  * `ThemeToggle` 은 `<ThemeProvider>` 내부에서만 동작한다.
@@ -31,35 +31,35 @@ const meta: Meta<typeof ThemeToggle> = {
       options: ['sm', 'md'],
     },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof ThemeToggle>;
+type Story = StoryObj<typeof ThemeToggle>
 
 export const TwoWay: Story = {
   args: {
     withSystem: false,
     size: 'md',
   },
-};
+}
 
 export const ThreeWay: Story = {
   args: {
     withSystem: true,
     size: 'md',
   },
-};
+}
 
 export const Small: Story = {
   args: {
     withSystem: true,
     size: 'sm',
   },
-};
+}
 
 function ThemeReadout() {
-  const { theme, resolvedTheme } = useTheme();
+  const { theme, resolvedTheme } = useTheme()
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-sm">
       <div>
@@ -71,7 +71,7 @@ function ThemeReadout() {
         <code className="font-mono text-[var(--color-foreground)]">{resolvedTheme}</code>
       </div>
     </div>
-  );
+  )
 }
 
 export const SideBySide: Story = {
@@ -89,4 +89,4 @@ export const SideBySide: Story = {
       </p>
     </div>
   ),
-};
+}
