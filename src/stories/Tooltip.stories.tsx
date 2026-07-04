@@ -1,19 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../components/tooltip';
-import { Button } from '../components/button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../components/tooltip'
+import { Button } from '../components/button'
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
-};
-export default meta;
-type Story = StoryObj<typeof meta>;
+}
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -34,4 +29,4 @@ export const Default: Story = {
       </div>
     </TooltipProvider>
   ),
-};
+}
