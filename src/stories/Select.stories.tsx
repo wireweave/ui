@@ -1,19 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../components/select';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select'
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
   tags: ['autodocs'],
-};
-export default meta;
-type Story = StoryObj<typeof meta>;
+}
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -31,4 +25,4 @@ export const Default: Story = {
       </Select>
     </div>
   ),
-};
+}

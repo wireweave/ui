@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Switch } from '../components/switch';
-import { Label } from '../components/label';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Switch } from '../components/switch'
+import { Label } from '../components/label'
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch,
   tags: ['autodocs'],
-};
-export default meta;
-type Story = StoryObj<typeof meta>;
+}
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -27,4 +27,4 @@ export const Default: Story = {
       </div>
     </div>
   ),
-};
+}
