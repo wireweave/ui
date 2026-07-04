@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../components/button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '../components/button'
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -8,73 +8,84 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'secondary', 'gradient', 'outline', 'ghost', 'success', 'warning', 'destructive', 'link'],
+      options: [
+        'default',
+        'primary',
+        'secondary',
+        'gradient',
+        'outline',
+        'ghost',
+        'success',
+        'warning',
+        'destructive',
+        'link',
+      ],
     },
     size: {
       control: 'select',
       options: ['default', 'sm', 'lg', 'icon'],
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     children: 'Button',
     variant: 'default',
   },
-};
+}
 
 export const Primary: Story = {
   args: {
     children: 'Primary',
     variant: 'primary',
   },
-};
+}
 
 export const Gradient: Story = {
   args: {
     children: 'Gradient',
     variant: 'gradient',
   },
-};
+}
 
 export const Outline: Story = {
   args: {
     children: 'Outline',
     variant: 'outline',
   },
-};
+}
 
 export const Ghost: Story = {
   args: {
     children: 'Ghost',
     variant: 'ghost',
   },
-};
+}
 
 export const Success: Story = {
   args: {
     children: 'Success',
     variant: 'success',
   },
-};
+}
 
 export const Warning: Story = {
   args: {
     children: 'Warning',
     variant: 'warning',
   },
-};
+}
 
 export const Destructive: Story = {
   args: {
     children: 'Destructive',
     variant: 'destructive',
   },
-};
+}
 
 export const AllVariants: Story = {
   render: () => (
@@ -91,7 +102,7 @@ export const AllVariants: Story = {
       <Button variant="link">Link</Button>
     </div>
   ),
-};
+}
 
 export const Sizes: Story = {
   render: () => (
@@ -101,11 +112,11 @@ export const Sizes: Story = {
       <Button size="lg">Large</Button>
     </div>
   ),
-};
+}
 
 export const Disabled: Story = {
   args: {
     children: 'Disabled',
     disabled: true,
   },
-};
+}

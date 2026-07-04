@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { StatCard, StatCardGrid } from '../components/stat-card';
-import { Key, TrendingUp, Activity, Users, DollarSign, ShoppingCart } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { StatCard, StatCardGrid } from '../components/stat-card'
+import { Key, TrendingUp, Activity, Users, DollarSign, ShoppingCart } from 'lucide-react'
 
 const meta: Meta<typeof StatCard> = {
   title: 'Data Display/StatCard',
@@ -15,10 +15,10 @@ const meta: Meta<typeof StatCard> = {
       </div>
     ),
   ],
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof StatCard>;
+export default meta
+type Story = StoryObj<typeof StatCard>
 
 export const Default: Story = {
   args: {
@@ -27,7 +27,7 @@ export const Default: Story = {
     icon: Key,
     iconColor: 'blue',
   },
-};
+}
 
 export const WithChange: Story = {
   args: {
@@ -40,7 +40,7 @@ export const WithChange: Story = {
       trend: 'up',
     },
   },
-};
+}
 
 export const DownTrend: Story = {
   args: {
@@ -53,7 +53,7 @@ export const DownTrend: Story = {
       trend: 'down',
     },
   },
-};
+}
 
 export const WithFooter: Story = {
   args: {
@@ -61,9 +61,13 @@ export const WithFooter: Story = {
     value: '2,438',
     icon: Users,
     iconColor: 'purple',
-    footer: <a href="#" className="text-sm text-[var(--color-blue-600)] hover:underline">View all users →</a>,
+    footer: (
+      <button type="button" className="text-sm text-[var(--color-blue-600)] hover:underline">
+        View all users →
+      </button>
+    ),
   },
-};
+}
 
 export const AllColors: StoryObj = {
   render: () => (
@@ -76,17 +80,12 @@ export const AllColors: StoryObj = {
       <StatCard title="Gray" value={600} icon={ShoppingCart} iconColor="gray" />
     </StatCardGrid>
   ),
-};
+}
 
 export const DashboardExample: StoryObj = {
   render: () => (
     <StatCardGrid columns={3}>
-      <StatCard
-        title="Active API Keys"
-        value={5}
-        icon={Key}
-        iconColor="blue"
-      />
+      <StatCard title="Active API Keys" value={5} icon={Key} iconColor="blue" />
       <StatCard
         title="This Month's Requests"
         value="45,231"
@@ -103,4 +102,4 @@ export const DashboardExample: StoryObj = {
       />
     </StatCardGrid>
   ),
-};
+}
