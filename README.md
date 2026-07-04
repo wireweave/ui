@@ -20,8 +20,8 @@ Peer dependencies: `react@^19`, `react-dom@^19`, `tailwindcss@^4`.
 ## Usage
 
 ```tsx
-import { Button, Card, CardContent } from '@wireweave/ui';
-import '@wireweave/ui/styles';
+import { Button, Card, CardContent } from '@wireweave/ui'
+import '@wireweave/ui/styles'
 
 export function Example() {
   return (
@@ -30,7 +30,7 @@ export function Example() {
         <Button variant="primary">Get started</Button>
       </CardContent>
     </Card>
-  );
+  )
 }
 ```
 
