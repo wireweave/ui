@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { cn } from '../lib/utils';
+import * as React from 'react'
+import { cn } from '../lib/utils'
 
 /**
  * Wireweave UI EmptyState
@@ -9,11 +9,11 @@ import { cn } from '../lib/utils';
  */
 
 interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
-  icon?: React.ComponentType<{ className?: string }>;
-  title: string;
-  description?: string;
-  action?: React.ReactNode;
-  variant?: 'default' | 'card' | 'dashed';
+  icon?: React.ComponentType<{ className?: string }>
+  title: string
+  description?: string
+  action?: React.ReactNode
+  variant?: 'default' | 'card' | 'dashed'
 }
 
 export function EmptyState({
@@ -30,31 +30,31 @@ export function EmptyState({
       className={cn(
         'p-8 text-center',
         // 시맨틱 변수 사용: bg-card, border-border, bg-muted
-        variant === 'card' && 'bg-card border border-border rounded-xl shadow-sm',
-        variant === 'dashed' && 'bg-muted rounded-xl border-2 border-dashed border-border',
-        className
+        variant === 'card' && 'bg-card border-border rounded-xl border shadow-sm',
+        variant === 'dashed' && 'bg-muted border-border rounded-xl border-2 border-dashed',
+        className,
       )}
       {...props}
     >
       {Icon && (
         // 시맨틱 변수 사용: text-muted-foreground
-        <Icon className="mx-auto h-12 w-12 text-muted-foreground" />
+        <Icon className="text-muted-foreground mx-auto h-12 w-12" />
       )}
       {/* 시맨틱 변수 사용: text-foreground */}
-      <h3 className={cn('font-semibold text-foreground', Icon ? 'mt-4 text-lg' : 'text-lg')}>
+      <h3 className={cn('text-foreground font-semibold', Icon ? 'mt-4 text-lg' : 'text-lg')}>
         {title}
       </h3>
       {description && (
         // 시맨틱 변수 사용: text-muted-foreground
-        <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground mt-2 text-sm">{description}</p>
       )}
       {action && <div className="mt-6">{action}</div>}
     </div>
-  );
+  )
 }
 
 interface EmptyStateActionProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: React.ComponentType<{ className?: string }>;
+  icon?: React.ComponentType<{ className?: string }>
 }
 
 export function EmptyStateAction({
@@ -67,14 +67,14 @@ export function EmptyStateAction({
     <button
       className={cn(
         // 시맨틱 변수 사용: bg-primary, text-primary-foreground, hover:bg-primary-hover
-        'inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground',
-        'shadow-sm hover:bg-primary-hover transition-colors',
-        className
+        'bg-primary text-primary-foreground inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium',
+        'hover:bg-primary-hover shadow-sm transition-colors',
+        className,
       )}
       {...props}
     >
       {Icon && <Icon className="h-4 w-4" />}
       {children}
     </button>
-  );
+  )
 }
