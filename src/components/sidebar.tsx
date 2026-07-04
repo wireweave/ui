@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../lib/utils';
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '../lib/utils'
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 
 /**
  * Wireweave UI Sidebar
@@ -17,41 +17,41 @@ import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
  */
 
 interface SidebarContextValue {
-  collapsed: boolean;
-  setCollapsed: (collapsed: boolean) => void;
-  mobileOpen: boolean;
-  setMobileOpen: (open: boolean) => void;
+  collapsed: boolean
+  setCollapsed: (collapsed: boolean) => void
+  mobileOpen: boolean
+  setMobileOpen: (open: boolean) => void
 }
 
-const SidebarContext = React.createContext<SidebarContextValue | undefined>(undefined);
+const SidebarContext = React.createContext<SidebarContextValue | undefined>(undefined)
 
 export function useSidebar() {
-  const context = React.useContext(SidebarContext);
+  const context = React.useContext(SidebarContext)
   if (!context) {
-    throw new Error('useSidebar must be used within a SidebarProvider');
+    throw new Error('useSidebar must be used within a SidebarProvider')
   }
-  return context;
+  return context
 }
 
 interface SidebarProviderProps {
-  children: React.ReactNode;
-  defaultCollapsed?: boolean;
+  children: React.ReactNode
+  defaultCollapsed?: boolean
 }
 
 export function SidebarProvider({ children, defaultCollapsed = false }: SidebarProviderProps) {
-  const [collapsed, setCollapsed] = React.useState(defaultCollapsed);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   return (
     <SidebarContext.Provider value={{ collapsed, setCollapsed, mobileOpen, setMobileOpen }}>
       {children}
     </SidebarContext.Provider>
-  );
+  )
 }
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  collapsedWidth?: string;
-  expandedWidth?: string;
+  collapsedWidth?: string
+  expandedWidth?: string
 }
 
 export function Sidebar({
@@ -61,36 +61,38 @@ export function Sidebar({
   expandedWidth = 'w-60',
   ...props
 }: SidebarProps) {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar()
 
   return (
     <aside
       className={cn(
-        'hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col transition-all duration-200',
+        'hidden transition-all duration-200 lg:fixed lg:inset-y-0 lg:flex lg:flex-col',
         collapsed ? collapsedWidth : expandedWidth,
-        className
+        className,
       )}
       {...props}
     >
-      <div className="flex flex-1 flex-col rounded-xl m-2 bg-[var(--color-sidebar)] text-[var(--color-sidebar-foreground)]">
+      <div className="m-2 flex flex-1 flex-col rounded-xl bg-[var(--color-sidebar)] text-[var(--color-sidebar-foreground)]">
         {children}
       </div>
     </aside>
-  );
+  )
 }
 
 interface SidebarMobileProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export function SidebarMobile({ className, children, ...props }: SidebarMobileProps) {
-  const { mobileOpen, setMobileOpen } = useSidebar();
+  const { mobileOpen, setMobileOpen } = useSidebar()
 
-  if (!mobileOpen) return null;
+  if (!mobileOpen) return null
 
   return (
     <div className={cn('fixed inset-0 z-50 lg:hidden', className)} {...props}>
-      <div
+      <button
+        type="button"
+        aria-label="Close sidebar"
         className="fixed inset-0 bg-[var(--color-sidebar-overlay)]"
         onClick={() => setMobileOpen(false)}
       />
@@ -98,13 +100,13 @@ export function SidebarMobile({ className, children, ...props }: SidebarMobilePr
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 interface SidebarHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  logo?: React.ReactNode;
-  title?: string;
-  showCollapseButton?: boolean;
+  logo?: React.ReactNode
+  title?: string
+  showCollapseButton?: boolean
 }
 
 export function SidebarHeader({
@@ -115,20 +117,20 @@ export function SidebarHeader({
   children,
   ...props
 }: SidebarHeaderProps) {
-  const { collapsed, setCollapsed } = useSidebar();
+  const { collapsed, setCollapsed } = useSidebar()
 
   return (
     <div
       className={cn(
         'flex items-center gap-2.5 px-5 py-4',
         collapsed && 'justify-center px-2',
-        className
+        className,
       )}
       {...props}
     >
       {logo || (
         <div
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold flex-shrink-0 text-[var(--color-primary-foreground)]"
+          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold text-[var(--color-primary-foreground)]"
           style={{
             backgroundImage:
               'linear-gradient(to bottom right, var(--color-sidebar-logo-from), var(--color-sidebar-logo-to))',
@@ -138,7 +140,7 @@ export function SidebarHeader({
         </div>
       )}
       {!collapsed && title && (
-        <span className="text-[var(--color-sidebar-foreground)] font-semibold text-base">
+        <span className="text-base font-semibold text-[var(--color-sidebar-foreground)]">
           {title}
         </span>
       )}
@@ -146,7 +148,7 @@ export function SidebarHeader({
       {showCollapseButton && !collapsed && (
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="ml-auto p-1.5 rounded-md text-[var(--color-sidebar-foreground-muted)] hover:bg-[var(--color-sidebar-hover)] hover:text-[var(--color-sidebar-foreground)] transition-colors"
+          className="ml-auto rounded-md p-1.5 text-[var(--color-sidebar-foreground-muted)] transition-colors hover:bg-[var(--color-sidebar-hover)] hover:text-[var(--color-sidebar-foreground)]"
           title="Collapse sidebar"
         >
           <PanelLeftClose className="h-4 w-4" />
@@ -155,43 +157,43 @@ export function SidebarHeader({
       {showCollapseButton && collapsed && (
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute right-0 translate-x-1/2 p-1.5 rounded-md bg-[var(--color-sidebar-hover)] text-[var(--color-sidebar-foreground)] hover:bg-[var(--color-sidebar-active)] transition-colors"
+          className="absolute right-0 translate-x-1/2 rounded-md bg-[var(--color-sidebar-hover)] p-1.5 text-[var(--color-sidebar-foreground)] transition-colors hover:bg-[var(--color-sidebar-active)]"
           title="Expand sidebar"
         >
           <PanelLeftOpen className="h-4 w-4" />
         </button>
       )}
     </div>
-  );
+  )
 }
 
-interface SidebarContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+type SidebarContentProps = React.HTMLAttributes<HTMLDivElement>
 
 export function SidebarContent({ className, children, ...props }: SidebarContentProps) {
   return (
-    <nav className={cn('flex flex-1 flex-col px-3 py-2 overflow-y-auto', className)} {...props}>
+    <nav className={cn('flex flex-1 flex-col overflow-y-auto px-3 py-2', className)} {...props}>
       <div className="flex-1 space-y-1">{children}</div>
     </nav>
-  );
+  )
 }
 
 interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
-  title?: string;
+  title?: string
 }
 
 export function SidebarSection({ className, title, children, ...props }: SidebarSectionProps) {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar()
 
   return (
     <div className={cn('py-2', className)} {...props}>
       {title && !collapsed && (
-        <p className="px-3 mb-2 text-[11px] font-semibold text-[var(--color-sidebar-foreground-muted)] uppercase tracking-wider">
+        <p className="mb-2 px-3 text-[11px] font-semibold tracking-wider text-[var(--color-sidebar-foreground-muted)] uppercase">
           {title}
         </p>
       )}
       <ul className="space-y-1">{children}</ul>
     </div>
-  );
+  )
 }
 
 const sidebarItemVariants = cva(
@@ -200,21 +202,19 @@ const sidebarItemVariants = cva(
     variants: {
       active: {
         true: 'bg-[var(--color-sidebar-active)] text-[var(--color-sidebar-active-foreground)]',
-        false:
-          'text-[var(--color-sidebar-foreground)] hover:bg-[var(--color-sidebar-hover)]',
+        false: 'text-[var(--color-sidebar-foreground)] hover:bg-[var(--color-sidebar-hover)]',
       },
     },
     defaultVariants: {
       active: false,
     },
-  }
-);
+  },
+)
 
 interface SidebarItemProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof sidebarItemVariants> {
-  icon?: React.ComponentType<{ className?: string }>;
-  as?: React.ElementType;
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof sidebarItemVariants> {
+  icon?: React.ComponentType<{ className?: string }>
+  as?: React.ElementType
 }
 
 export function SidebarItem({
@@ -225,7 +225,7 @@ export function SidebarItem({
   as: Component = 'a',
   ...props
 }: SidebarItemProps) {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar()
 
   return (
     <li>
@@ -233,7 +233,7 @@ export function SidebarItem({
         className={cn(
           sidebarItemVariants({ active }),
           collapsed ? 'justify-center px-2' : 'gap-2.5',
-          className
+          className,
         )}
         title={collapsed && typeof children === 'string' ? children : undefined}
         {...props}
@@ -242,24 +242,24 @@ export function SidebarItem({
         {!collapsed && children}
       </Component>
     </li>
-  );
+  )
 }
 
-interface SidebarFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+type SidebarFooterProps = React.HTMLAttributes<HTMLDivElement>
 
 export function SidebarFooter({ className, children, ...props }: SidebarFooterProps) {
   return (
     <div className={cn('mt-auto p-3', className)} {...props}>
       {children}
     </div>
-  );
+  )
 }
 
 interface SidebarUserProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
-  email?: string;
-  avatarUrl?: string;
-  avatarFallback?: string;
+  name: string
+  email?: string
+  avatarUrl?: string
+  avatarFallback?: string
 }
 
 export function SidebarUser({
@@ -270,7 +270,7 @@ export function SidebarUser({
   avatarFallback,
   ...props
 }: SidebarUserProps) {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar()
 
   const initials =
     avatarFallback ||
@@ -279,15 +279,15 @@ export function SidebarUser({
       .map((n) => n[0])
       .join('')
       .toUpperCase()
-      .slice(0, 2);
+      .slice(0, 2)
 
-  if (collapsed) return null;
+  if (collapsed) return null
 
   return (
     <div
       className={cn(
-        'flex items-center gap-3 px-3 py-3 border-t border-[var(--color-sidebar-border)]',
-        className
+        'flex items-center gap-3 border-t border-[var(--color-sidebar-border)] px-3 py-3',
+        className,
       )}
       {...props}
     >
@@ -304,21 +304,21 @@ export function SidebarUser({
           {initials}
         </div>
       )}
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-[var(--color-sidebar-foreground)] truncate">
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium text-[var(--color-sidebar-foreground)]">
           {name}
         </p>
         {email && name !== email && (
-          <p className="text-xs text-[var(--color-sidebar-foreground-muted)] truncate">{email}</p>
+          <p className="truncate text-xs text-[var(--color-sidebar-foreground-muted)]">{email}</p>
         )}
       </div>
     </div>
-  );
+  )
 }
 
 interface SidebarMainProps extends React.HTMLAttributes<HTMLDivElement> {
-  collapsedWidth?: string;
-  expandedWidth?: string;
+  collapsedWidth?: string
+  expandedWidth?: string
 }
 
 export function SidebarMain({
@@ -328,25 +328,25 @@ export function SidebarMain({
   expandedWidth = 'lg:pl-64',
   ...props
 }: SidebarMainProps) {
-  const { collapsed } = useSidebar();
+  const { collapsed } = useSidebar()
 
   return (
     <div
       className={cn(
-        'flex-1 flex flex-col min-w-0 transition-all duration-200',
+        'flex min-w-0 flex-1 flex-col transition-all duration-200',
         collapsed ? collapsedWidth : expandedWidth,
-        className
+        className,
       )}
       {...props}
     >
       {children}
     </div>
-  );
+  )
 }
 
 interface SidebarMobileHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  title?: string;
-  menuIcon?: React.ReactNode;
+  title?: string
+  menuIcon?: React.ReactNode
 }
 
 export function SidebarMobileHeader({
@@ -356,13 +356,13 @@ export function SidebarMobileHeader({
   children,
   ...props
 }: SidebarMobileHeaderProps) {
-  const { setMobileOpen } = useSidebar();
+  const { setMobileOpen } = useSidebar()
 
   return (
     <div
       className={cn(
         'sticky top-0 z-40 flex h-14 items-center gap-4 border-b border-[var(--color-border)] bg-[var(--color-card)] px-4 lg:hidden',
-        className
+        className,
       )}
       {...props}
     >
@@ -377,5 +377,5 @@ export function SidebarMobileHeader({
       )}
       {children}
     </div>
-  );
+  )
 }
