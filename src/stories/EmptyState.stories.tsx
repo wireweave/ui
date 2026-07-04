@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { EmptyState, EmptyStateAction } from '../components/empty-state';
-import { Button } from '../components/button';
-import { Key, FolderOpen, FileCode, Search, Inbox, Plus } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { EmptyState, EmptyStateAction } from '../components/empty-state'
+import { Button } from '../components/button'
+import { Key, FolderOpen, FileCode, Search, Inbox, Plus } from 'lucide-react'
 
 const meta: Meta<typeof EmptyState> = {
   title: 'Feedback/EmptyState',
@@ -16,10 +16,10 @@ const meta: Meta<typeof EmptyState> = {
       </div>
     ),
   ],
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof EmptyState>;
+export default meta
+type Story = StoryObj<typeof EmptyState>
 
 export const Default: Story = {
   args: {
@@ -27,7 +27,7 @@ export const Default: Story = {
     title: 'No API keys yet',
     description: 'Create your first API key to start using Wireweave services',
   },
-};
+}
 
 export const WithAction: Story = {
   args: {
@@ -41,7 +41,7 @@ export const WithAction: Story = {
       </Button>
     ),
   },
-};
+}
 
 export const CardVariant: Story = {
   args: {
@@ -56,7 +56,7 @@ export const CardVariant: Story = {
       </Button>
     ),
   },
-};
+}
 
 export const DashedVariant: Story = {
   args: {
@@ -65,18 +65,16 @@ export const DashedVariant: Story = {
     title: 'Drop files here',
     description: 'or click to browse from your computer',
   },
-};
+}
 
 export const SearchNoResults: Story = {
   args: {
     icon: Search,
     title: 'No results found',
-    description: 'Try adjusting your search or filter to find what you\'re looking for',
-    action: (
-      <Button variant="outline">Clear filters</Button>
-    ),
+    description: "Try adjusting your search or filter to find what you're looking for",
+    action: <Button variant="outline">Clear filters</Button>,
   },
-};
+}
 
 export const AllVariants: StoryObj = {
   render: () => (
@@ -101,7 +99,7 @@ export const AllVariants: StoryObj = {
       />
     </div>
   ),
-};
+}
 
 export const WithCustomAction: StoryObj = {
   render: () => (
@@ -110,11 +108,7 @@ export const WithCustomAction: StoryObj = {
       icon={Key}
       title="No API keys"
       description="Create an API key to authenticate your requests"
-      action={
-        <EmptyStateAction icon={Plus}>
-          Create API Key
-        </EmptyStateAction>
-      }
+      action={<EmptyStateAction icon={Plus}>Create API Key</EmptyStateAction>}
     />
   ),
-};
+}
