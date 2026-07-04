@@ -1,23 +1,22 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   FormField,
   FormInput,
   FormTextarea,
   InputWithIcon,
   SearchInput,
-} from '../components/form-field';
-import { Input } from '../components/input';
-import { Textarea } from '../components/textarea';
-import { Mail, Lock, User, Search, DollarSign } from 'lucide-react';
+} from '../components/form-field'
+import { Input } from '../components/input'
+import { Mail, Lock, User, DollarSign } from 'lucide-react'
 
 const meta: Meta = {
   title: 'Form/FormField',
   parameters: {
     layout: 'padded',
   },
-};
+}
 
-export default meta;
+export default meta
 
 export const BasicFormField: StoryObj = {
   render: () => (
@@ -25,7 +24,7 @@ export const BasicFormField: StoryObj = {
       <Input type="email" placeholder="Enter your email" />
     </FormField>
   ),
-};
+}
 
 export const WithDescription: StoryObj = {
   render: () => (
@@ -36,99 +35,63 @@ export const WithDescription: StoryObj = {
       <Input placeholder="e.g., Production API Key" />
     </FormField>
   ),
-};
+}
 
 export const WithError: StoryObj = {
   render: () => (
-    <FormField
-      label="Password"
-      error="Password must be at least 8 characters"
-      required
-    >
+    <FormField label="Password" error="Password must be at least 8 characters" required>
       <Input type="password" placeholder="Enter password" />
     </FormField>
   ),
-};
+}
 
 export const FormInputComponent: StoryObj = {
   render: () => (
     <div className="space-y-4">
-      <FormInput
-        label="Full Name"
-        placeholder="John Doe"
-        required
-      />
+      <FormInput label="Full Name" placeholder="John Doe" required />
       <FormInput
         label="Email Address"
         type="email"
         placeholder="john@example.com"
         description="We'll never share your email"
       />
-      <FormInput
-        label="Username"
-        placeholder="johndoe"
-        error="This username is already taken"
-      />
+      <FormInput label="Username" placeholder="johndoe" error="This username is already taken" />
     </div>
   ),
-};
+}
 
 export const FormTextareaComponent: StoryObj = {
   render: () => (
     <div className="space-y-4">
-      <FormTextarea
-        label="Description"
-        placeholder="Enter a description..."
-        rows={4}
-      />
+      <FormTextarea label="Description" placeholder="Enter a description..." rows={4} />
       <FormTextarea
         label="Bio"
         placeholder="Tell us about yourself"
         description="Max 500 characters"
         required
       />
-      <FormTextarea
-        label="Notes"
-        placeholder="Add notes..."
-        error="Notes cannot be empty"
-      />
+      <FormTextarea label="Notes" placeholder="Add notes..." error="Notes cannot be empty" />
     </div>
   ),
-};
+}
 
 export const InputWithIconLeft: StoryObj = {
   render: () => (
     <div className="space-y-4">
-      <InputWithIcon
-        icon={Mail}
-        placeholder="Email address"
-        type="email"
-      />
-      <InputWithIcon
-        icon={Lock}
-        placeholder="Password"
-        type="password"
-      />
-      <InputWithIcon
-        icon={User}
-        placeholder="Username"
-      />
+      <InputWithIcon icon={Mail} placeholder="Email address" type="email" />
+      <InputWithIcon icon={Lock} placeholder="Password" type="password" />
+      <InputWithIcon icon={User} placeholder="Username" />
     </div>
   ),
-};
+}
 
 export const InputWithIconRight: StoryObj = {
   render: () => (
     <div className="space-y-4">
-      <InputWithIcon
-        icon={DollarSign}
-        iconPosition="right"
-        placeholder="0.00"
-        type="number"
-      />
+      <InputWithIcon icon={DollarSign} iconPosition="right" placeholder="0.00" type="number" />
     </div>
   ),
-};
+}
 
 export const SearchInputComponent: StoryObj = {
   render: () => (
@@ -138,30 +101,18 @@ export const SearchInputComponent: StoryObj = {
       <SearchInput placeholder="Search users..." />
     </div>
   ),
-};
+}
 
 export const CompleteForm: StoryObj = {
   render: () => (
-    <form className="space-y-6 max-w-md">
+    <form className="max-w-md space-y-6">
       <h2 className="text-lg font-semibold">Create Account</h2>
-      <FormInput
-        label="Full Name"
-        placeholder="John Doe"
-        required
-      />
+      <FormInput label="Full Name" placeholder="John Doe" required />
       <FormField label="Email" required>
-        <InputWithIcon
-          icon={Mail}
-          placeholder="john@example.com"
-          type="email"
-        />
+        <InputWithIcon icon={Mail} placeholder="john@example.com" type="email" />
       </FormField>
       <FormField label="Password" required>
-        <InputWithIcon
-          icon={Lock}
-          placeholder="••••••••"
-          type="password"
-        />
+        <InputWithIcon icon={Lock} placeholder="••••••••" type="password" />
       </FormField>
       <FormTextarea
         label="Bio"
@@ -177,4 +128,4 @@ export const CompleteForm: StoryObj = {
       </button>
     </form>
   ),
-};
+}

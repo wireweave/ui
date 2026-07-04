@@ -1,32 +1,32 @@
-'use client';
+'use client'
 
 // Wireweave UI Design System - React Components
 // Based on Radix UI primitives with Tailwind CSS
 
 // Import styles for CSS extraction
-import './styles/index.css';
+import './styles/index.css'
 
 // Utilities
-export { cn } from './lib/utils';
+export { cn } from './lib/utils'
 
 // ============================================
 // Core Components
 // ============================================
 
-export { Button, buttonVariants } from './components/button';
-export type { ButtonProps } from './components/button';
+export { Button, buttonVariants } from './components/button'
+export type { ButtonProps } from './components/button'
 
-export { Input } from './components/input';
-export type { InputProps } from './components/input';
+export { Input } from './components/input'
+export type { InputProps } from './components/input'
 
-export { Label } from './components/label';
-export type { LabelProps } from './components/label';
+export { Label } from './components/label'
+export type { LabelProps } from './components/label'
 
-export { Textarea } from './components/textarea';
-export type { TextareaProps } from './components/textarea';
+export { Textarea } from './components/textarea'
+export type { TextareaProps } from './components/textarea'
 
-export { Badge, badgeVariants } from './components/badge';
-export type { BadgeProps } from './components/badge';
+export { Badge, badgeVariants } from './components/badge'
+export type { BadgeProps } from './components/badge'
 
 export {
   Card,
@@ -36,23 +36,23 @@ export {
   CardDescription,
   CardContent,
   CardBody,
-} from './components/card';
+} from './components/card'
 
-export { Separator } from './components/separator';
-export type { SeparatorProps } from './components/separator';
+export { Separator } from './components/separator'
+export type { SeparatorProps } from './components/separator'
 
-export { Skeleton } from './components/skeleton';
-export type { SkeletonProps } from './components/skeleton';
+export { Skeleton } from './components/skeleton'
+export type { SkeletonProps } from './components/skeleton'
 
 // ============================================
 // Form Components
 // ============================================
 
-export { Checkbox } from './components/checkbox';
-export type { CheckboxProps } from './components/checkbox';
+export { Checkbox } from './components/checkbox'
+export type { CheckboxProps } from './components/checkbox'
 
-export { Switch } from './components/switch';
-export type { SwitchProps } from './components/switch';
+export { Switch } from './components/switch'
+export type { SwitchProps } from './components/switch'
 
 export {
   Select,
@@ -63,14 +63,14 @@ export {
   SelectLabel,
   SelectItem,
   SelectSeparator,
-} from './components/select';
+} from './components/select'
 
 // ============================================
 // Navigation Components
 // ============================================
 
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './components/tabs';
-export type { TabsProps, TabsTriggerProps, TabsContentProps } from './components/tabs';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './components/tabs'
+export type { TabsProps, TabsTriggerProps, TabsContentProps } from './components/tabs'
 
 // ============================================
 // Overlay Components
@@ -87,7 +87,7 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-} from './components/dialog';
+} from './components/dialog'
 
 export {
   AlertDialog,
@@ -101,7 +101,7 @@ export {
   AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from './components/alert-dialog';
+} from './components/alert-dialog'
 
 export {
   DropdownMenu,
@@ -119,16 +119,16 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-} from './components/dropdown-menu';
+} from './components/dropdown-menu'
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './components/tooltip';
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './components/tooltip'
 
 // ============================================
 // Data Display Components
 // ============================================
 
-export { Avatar, AvatarImage, AvatarFallback, avatarVariants } from './components/avatar';
-export type { AvatarProps } from './components/avatar';
+export { Avatar, AvatarImage, AvatarFallback, avatarVariants } from './components/avatar'
+export type { AvatarProps } from './components/avatar'
 
 // ============================================
 // Layout Components
@@ -147,11 +147,11 @@ export {
   SidebarUser,
   SidebarMain,
   SidebarMobileHeader,
-} from './components/sidebar';
+} from './components/sidebar'
 
-export { PageHeader, PageSection } from './components/page-header';
+export { PageHeader, PageSection } from './components/page-header'
 
-export { StatCard, StatCardGrid } from './components/stat-card';
+export { StatCard, StatCardGrid } from './components/stat-card'
 
 // ============================================
 // Table Components
@@ -167,13 +167,13 @@ export {
   TableCellText,
   TableActions,
   TableWrapper,
-} from './components/table';
+} from './components/table'
 
 // ============================================
 // Feedback Components
 // ============================================
 
-export { Alert, AlertInline } from './components/alert';
+export { Alert, AlertInline } from './components/alert'
 
 export {
   type ToastProps,
@@ -188,9 +188,9 @@ export {
   Toaster,
   useToast,
   toast,
-} from './components/toast';
+} from './components/toast'
 
-export { EmptyState, EmptyStateAction } from './components/empty-state';
+export { EmptyState, EmptyStateAction } from './components/empty-state'
 
 // ============================================
 // Form Helpers
@@ -202,23 +202,54 @@ export {
   FormTextarea,
   InputWithIcon,
   SearchInput,
-} from './components/form-field';
+} from './components/form-field'
 
 // ============================================
 // Code Display Components
 // ============================================
 
-export { CodeBlock, CodeBlockHeader } from './components/code-block';
+export { CodeBlock, CodeBlockHeader } from './components/code-block'
+
+// ============================================
+// SSOT Panel Components
+// ============================================
+
+export {
+  NodeDetailPanel,
+  NodeDetailPanelHeader,
+  NodeDetailPanelBody,
+  NodeDetailPanelSection,
+  NodeDetailPanelEdges,
+  NodeDetailPanelFooter,
+} from './components/node-detail-panel'
+export type {
+  NodeDetailPanelProps,
+  NodeDetailPanelHeaderProps,
+  NodeDetailPanelSectionProps,
+  NodeDetailPanelEdge,
+  NodeDetailPanelEdgesProps,
+} from './components/node-detail-panel'
+
+export {
+  InterviewPanel,
+  InterviewPanelHeader,
+  InterviewMessageList,
+  InterviewMessage,
+  InterviewQuestionCard,
+  InterviewPanelInput,
+} from './components/interview-panel'
+export type {
+  InterviewPanelProps,
+  InterviewPanelHeaderProps,
+  InterviewMessageProps,
+  InterviewQuestionCardProps,
+} from './components/interview-panel'
 
 // ============================================
 // Theme System
 // ============================================
 
-export {
-  ThemeProvider,
-  useTheme,
-  ThemeToggle,
-} from './components/theme';
-export type { ThemeMode, ResolvedTheme } from './components/theme';
+export { ThemeProvider, useTheme, ThemeToggle } from './components/theme'
+export type { ThemeMode, ResolvedTheme } from './components/theme'
 
 // `getThemeInitScript` 는 server-safe 전용 entry — `import { getThemeInitScript } from '@wireweave/ui/server'`
