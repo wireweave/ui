@@ -17,39 +17,39 @@ Wireweave 디자인시스템 단일 소스. dashboard / admin / 기타 wireweave
 1. **팔레트 변수 (고정값)** — `--color-slate-{50..950}`, `--color-blue-{50..900}`, `--color-green-…`, `--color-red-…`, `--color-yellow-…`, `--color-purple-…`, `--color-orange-…`, `--color-white`, `--color-black`
 2. **시맨틱 변수 (팔레트 참조)** — 컴포넌트가 사용하는 의미 기반 토큰
 
-| 시맨틱 토큰 | 라이트 매핑 | 용도 |
-|------------|-----------|------|
-| `--color-background` | `slate-50` | 페이지 배경 |
-| `--color-foreground` | `slate-900` | 본문 텍스트 |
-| `--color-card` | `white` | 카드/패널 배경 |
-| `--color-primary` | `blue-500` | CTA, 시그니처 |
-| `--color-primary-hover` | `blue-600` | primary hover |
-| `--color-secondary` | `slate-100` | 보조 버튼 |
-| `--color-muted` | `slate-100` | 비활성/배경 강조 |
-| `--color-muted-foreground` | `slate-500` | 부가 텍스트 |
-| `--color-destructive` | `red-500` | 위험 액션 |
-| `--color-success` | `green-500` | 성공 시그널 |
-| `--color-warning` | `yellow-500` | 경고 시그널 |
-| `--color-border` | `slate-200` | 구분선 |
-| `--color-input` | `slate-200` | 입력 보더 |
-| `--color-ring` | `blue-500` | focus 링 |
+| 시맨틱 토큰                | 라이트 매핑  | 용도             |
+| -------------------------- | ------------ | ---------------- |
+| `--color-background`       | `slate-50`   | 페이지 배경      |
+| `--color-foreground`       | `slate-900`  | 본문 텍스트      |
+| `--color-card`             | `white`      | 카드/패널 배경   |
+| `--color-primary`          | `blue-500`   | CTA, 시그니처    |
+| `--color-primary-hover`    | `blue-600`   | primary hover    |
+| `--color-secondary`        | `slate-100`  | 보조 버튼        |
+| `--color-muted`            | `slate-100`  | 비활성/배경 강조 |
+| `--color-muted-foreground` | `slate-500`  | 부가 텍스트      |
+| `--color-destructive`      | `red-500`    | 위험 액션        |
+| `--color-success`          | `green-500`  | 성공 시그널      |
+| `--color-warning`          | `yellow-500` | 경고 시그널      |
+| `--color-border`           | `slate-200`  | 구분선           |
+| `--color-input`            | `slate-200`  | 입력 보더        |
+| `--color-ring`             | `blue-500`   | focus 링         |
 
 ### Sidebar 토큰 (페이지 배경 ↔ 사이드바 인버전)
 
 `Sidebar` 는 페이지 배경과 항상 **반대 톤**을 유지한다. 라이트 페이지에서는 어두운 사이드바, 다크 페이지에서는 밝은 사이드바. 모든 사이드바 색은 다음 토큰을 통해서만 적용한다 — 컴포넌트 내부에서 팔레트 변수, hex, Tailwind 팔레트 utility 직접 사용 금지.
 
-| 시맨틱 토큰 | 라이트 매핑 | 다크 매핑 (인버전) | 용도 |
-|------------|-----------|-------------------|------|
-| `--color-sidebar` | `slate-800` | `slate-100` | 사이드바 배경 |
-| `--color-sidebar-hover` | `slate-700` | `slate-200` | 아이템 hover bg |
-| `--color-sidebar-foreground` | `slate-50` | `slate-900` | 메인 텍스트 |
-| `--color-sidebar-foreground-muted` | `slate-400` | `slate-500` | 섹션 타이틀 / 서브텍스트 |
-| `--color-sidebar-active` | `blue-500 @ 20%` | `blue-500 @ 18%` | 활성 아이템 bg (color-mix) |
-| `--color-sidebar-active-foreground` | `white` | `blue-700` | 활성 아이템 텍스트 |
-| `--color-sidebar-border` | `slate-700` | `slate-300` | 구분선 (사이드바 내부) |
-| `--color-sidebar-overlay` | `slate-900 @ 75%` | `slate-900 @ 60%` | 모바일 사이드바 backdrop |
-| `--color-sidebar-logo-from` | `blue-500` | `blue-500` | 로고 그라디언트 시작 |
-| `--color-sidebar-logo-to` | `violet-500` | `violet-500` | 로고 그라디언트 끝 |
+| 시맨틱 토큰                         | 라이트 매핑       | 다크 매핑 (인버전) | 용도                       |
+| ----------------------------------- | ----------------- | ------------------ | -------------------------- |
+| `--color-sidebar`                   | `slate-800`       | `slate-100`        | 사이드바 배경              |
+| `--color-sidebar-hover`             | `slate-700`       | `slate-200`        | 아이템 hover bg            |
+| `--color-sidebar-foreground`        | `slate-50`        | `slate-900`        | 메인 텍스트                |
+| `--color-sidebar-foreground-muted`  | `slate-400`       | `slate-500`        | 섹션 타이틀 / 서브텍스트   |
+| `--color-sidebar-active`            | `blue-500 @ 20%`  | `blue-500 @ 18%`   | 활성 아이템 bg (color-mix) |
+| `--color-sidebar-active-foreground` | `white`           | `blue-700`         | 활성 아이템 텍스트         |
+| `--color-sidebar-border`            | `slate-700`       | `slate-300`        | 구분선 (사이드바 내부)     |
+| `--color-sidebar-overlay`           | `slate-900 @ 75%` | `slate-900 @ 60%`  | 모바일 사이드바 backdrop   |
+| `--color-sidebar-logo-from`         | `blue-500`        | `blue-500`         | 로고 그라디언트 시작       |
+| `--color-sidebar-logo-to`           | `violet-500`      | `violet-500`       | 로고 그라디언트 끝         |
 
 > 알파 값은 `color-mix(in oklab, var(--color-blue-500) 20%, transparent)` 패턴으로 표현 — Tailwind `/N` 문법은 `var()` 와 함께 동작하지 않는다.
 
@@ -112,9 +112,8 @@ Wireweave 디자인시스템 단일 소스. dashboard / admin / 기타 wireweave
 ### `<ThemeProvider>`
 
 ```tsx
-import { ThemeProvider } from '@wireweave/ui';
-
-<ThemeProvider defaultTheme="system" storageKey="wireweave-theme">
+import { ThemeProvider } from '@wireweave/ui'
+;<ThemeProvider defaultTheme="system" storageKey="wireweave-theme">
   {children}
 </ThemeProvider>
 ```
@@ -127,7 +126,7 @@ import { ThemeProvider } from '@wireweave/ui';
 ### `useTheme()`
 
 ```ts
-const { theme, resolvedTheme, setTheme } = useTheme();
+const { theme, resolvedTheme, setTheme } = useTheme()
 // theme: 'light' | 'dark' | 'system' (사용자 선택값)
 // resolvedTheme: 'light' | 'dark' (실제 적용 테마)
 // setTheme(next): 변경 + localStorage 저장 + html class 갱신
@@ -150,9 +149,8 @@ import { ThemeToggle } from '@wireweave/ui';
 Next.js 같은 SSR 환경에서 hydration 전에 html class 를 적용하려면 head 에 inline script 를 박는다. **server entry 에서 import 한다** — `@wireweave/ui` 메인 entry 는 `'use client'` 라 RSC 환경에서 호출 불가.
 
 ```tsx
-import { getThemeInitScript } from '@wireweave/ui/server';
-
-<head>
+import { getThemeInitScript } from '@wireweave/ui/server'
+;<head>
   <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
 </head>
 ```
@@ -164,7 +162,7 @@ storage key 를 커스텀했으면 `getThemeInitScript('my-key')` 로 동일하�
 ```bash
 pnpm install
 pnpm build           # vite library build (ESM + CJS + d.ts + CSS)
-pnpm type-check      # tsc --noEmit
+pnpm typecheck       # tsc --noEmit
 pnpm storybook       # 6006 포트 dev
 pnpm build-storybook # 정적 빌드 (ui.wireweave.org 호스팅용)
 ```
@@ -174,3 +172,13 @@ pnpm build-storybook # 정적 빌드 (ui.wireweave.org 호스팅용)
 - `develop` 푸시 → `--tag beta` 자동 publish (release-it preRelease)
 - `main` 푸시 → `--tag latest` 자동 publish
 - npm Trusted Publisher (OIDC + provenance), 토큰 secret 미사용
+
+## 관련 룰
+
+- `.claude/rules/radix-cva.md` — 컴포넌트 작성 패턴 (Radix + CVA + Tailwind)
+- `.claude/rules/design-tokens.md` — 2-tier 토큰 / 시맨틱 vs 팔레트
+- `.claude/rules/theming.md` — ThemeProvider / SSR FOUC 통합
+- `.claude/rules/storybook.md` — 스토리 작성 규칙
+- `.claude/rules/public-api.md` — entry / export / BREAKING 정책
+
+상위 룰: `wireframe-lang/.claude/rules/quality-bar.md`, `commit-workflow.md`, `type-safety.md`
