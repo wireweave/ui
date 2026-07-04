@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Alert, AlertInline } from '../components/alert';
-import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Alert, AlertInline } from '../components/alert'
+import { useState } from 'react'
 
 const meta: Meta<typeof Alert> = {
   title: 'Feedback/Alert',
@@ -8,50 +8,51 @@ const meta: Meta<typeof Alert> = {
   parameters: {
     layout: 'padded',
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Alert>;
+export default meta
+type Story = StoryObj<typeof Alert>
 
 export const Info: Story = {
   args: {
     variant: 'info',
     children: 'This is an informational alert message.',
   },
-};
+}
 
 export const Success: Story = {
   args: {
     variant: 'success',
     children: 'Your changes have been saved successfully.',
   },
-};
+}
 
 export const Warning: Story = {
   args: {
     variant: 'warning',
     children: 'Please review your settings before proceeding.',
   },
-};
+}
 
 export const Error: Story = {
   args: {
     variant: 'error',
     children: 'An error occurred while processing your request.',
   },
-};
+}
 
 export const WithTitle: Story = {
   args: {
     variant: 'info',
     title: 'Getting Started',
-    children: 'Use your API key to authenticate requests to the Wireweave MCP server. Include your key in the request headers.',
+    children:
+      'Use your API key to authenticate requests to the Wireweave MCP server. Include your key in the request headers.',
   },
-};
+}
 
 export const Dismissible: StoryObj = {
   render: function DismissibleAlert() {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(true)
 
     if (!visible) {
       return (
@@ -61,7 +62,7 @@ export const Dismissible: StoryObj = {
         >
           Show Alert
         </button>
-      );
+      )
     }
 
     return (
@@ -73,9 +74,9 @@ export const Dismissible: StoryObj = {
       >
         Your API key will expire in 7 days. Please renew it to continue using the service.
       </Alert>
-    );
+    )
   },
-};
+}
 
 export const AllVariants: StoryObj = {
   render: () => (
@@ -94,7 +95,7 @@ export const AllVariants: StoryObj = {
       </Alert>
     </div>
   ),
-};
+}
 
 export const InlineAlerts: StoryObj = {
   render: () => (
@@ -105,4 +106,4 @@ export const InlineAlerts: StoryObj = {
       <AlertInline variant="info">Enter at least 8 characters</AlertInline>
     </div>
   ),
-};
+}
