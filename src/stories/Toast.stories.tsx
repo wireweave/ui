@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Toaster, useToast } from '../components/toast';
-import { Button } from '../components/button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Toaster, useToast } from '../components/toast'
+import { Button } from '../components/button'
 
 function ToastDemo() {
-  const { toast } = useToast();
+  const { toast } = useToast()
   return (
     <div className="flex flex-wrap gap-2">
       <Button
@@ -43,16 +43,16 @@ function ToastDemo() {
         Error toast
       </Button>
     </div>
-  );
+  )
 }
 
 const meta: Meta<typeof ToastDemo> = {
   title: 'Components/Toast',
   component: ToastDemo,
   tags: ['autodocs'],
-};
-export default meta;
-type Story = StoryObj<typeof meta>;
+}
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -61,4 +61,4 @@ export const Default: Story = {
       <Toaster />
     </>
   ),
-};
+}
