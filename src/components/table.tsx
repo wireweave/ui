@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../lib/utils';
+import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '../lib/utils'
 
 /**
  * Wireweave UI Table
@@ -13,76 +13,67 @@ import { cn } from '../lib/utils';
 // Table Wrapper (card-style container)
 // ============================================
 
-interface TableWrapperProps extends React.HTMLAttributes<HTMLDivElement> {}
+type TableWrapperProps = React.HTMLAttributes<HTMLDivElement>
 
 export function TableWrapper({ className, children, ...props }: TableWrapperProps) {
   return (
     <div
       className={cn(
-        'border rounded-xl overflow-hidden',
-        'bg-[var(--color-card)] border-[var(--color-border)]',
-        className
+        'overflow-hidden rounded-xl border',
+        'border-[var(--color-border)] bg-[var(--color-card)]',
+        className,
       )}
       {...props}
     >
       {children}
     </div>
-  );
+  )
 }
 
 // ============================================
 // Table
 // ============================================
 
-interface TableProps extends React.HTMLAttributes<HTMLTableElement> {}
+type TableProps = React.HTMLAttributes<HTMLTableElement>
 
 export function Table({ className, children, ...props }: TableProps) {
   return (
     <TableWrapper>
       <div className="overflow-x-auto">
-        <table
-          className={cn('w-full border-collapse', className)}
-          {...props}
-        >
+        <table className={cn('w-full border-collapse', className)} {...props}>
           {children}
         </table>
       </div>
     </TableWrapper>
-  );
+  )
 }
 
 // ============================================
 // TableHeader
 // ============================================
 
-interface TableHeaderProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+type TableHeaderProps = React.HTMLAttributes<HTMLTableSectionElement>
 
 export function TableHeader({ className, children, ...props }: TableHeaderProps) {
   return (
-    <thead
-      className={cn(
-        'bg-[var(--color-muted)]',
-        className
-      )}
-      {...props}
-    >
+    <thead className={cn('bg-[var(--color-muted)]', className)} {...props}>
       {children}
     </thead>
-  );
+  )
 }
 
 // ============================================
 // TableBody
 // ============================================
 
-interface TableBodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+type TableBodyProps = React.HTMLAttributes<HTMLTableSectionElement>
 
 export function TableBody({ className, children, ...props }: TableBodyProps) {
   return (
     <tbody className={className} {...props}>
       {children}
     </tbody>
-  );
+  )
 }
 
 // ============================================
@@ -90,124 +81,98 @@ export function TableBody({ className, children, ...props }: TableBodyProps) {
 // ============================================
 
 interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
-  hoverable?: boolean;
+  hoverable?: boolean
 }
 
-export function TableRow({
-  className,
-  hoverable = true,
-  children,
-  ...props
-}: TableRowProps) {
+export function TableRow({ className, hoverable = true, children, ...props }: TableRowProps) {
   return (
     <tr
       className={cn(
-        'border-b last:border-b-0 transition-colors',
+        'border-b transition-colors last:border-b-0',
         'border-[var(--color-border)]',
         hoverable && 'hover:bg-[var(--color-muted)]',
-        className
+        className,
       )}
       {...props}
     >
       {children}
     </tr>
-  );
+  )
 }
 
 // ============================================
 // TableHead
 // ============================================
 
-interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {}
+type TableHeadProps = React.ThHTMLAttributes<HTMLTableCellElement>
 
 export function TableHead({ className, children, ...props }: TableHeadProps) {
   return (
     <th
       className={cn(
-        'px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide',
+        'px-4 py-3 text-left text-xs font-semibold tracking-wide uppercase',
         'text-[var(--color-muted-foreground)]',
-        className
+        className,
       )}
       {...props}
     >
       {children}
     </th>
-  );
+  )
 }
 
 // ============================================
 // TableCell
 // ============================================
 
-interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {}
+type TableCellProps = React.TdHTMLAttributes<HTMLTableCellElement>
 
 export function TableCell({ className, children, ...props }: TableCellProps) {
   return (
-    <td
-      className={cn(
-        'px-4 py-3 text-sm',
-        className
-      )}
-      {...props}
-    >
+    <td className={cn('px-4 py-3 text-sm', className)} {...props}>
       {children}
     </td>
-  );
+  )
 }
 
 // ============================================
 // TableCellText (common text styling)
 // ============================================
 
-const tableCellTextVariants = cva(
-  'text-sm',
-  {
-    variants: {
-      variant: {
-        default: 'text-[var(--color-foreground)]',
-        muted: 'text-[var(--color-muted-foreground)]',
-        primary: 'font-medium text-[var(--color-foreground)]',
-      },
+const tableCellTextVariants = cva('text-sm', {
+  variants: {
+    variant: {
+      default: 'text-[var(--color-foreground)]',
+      muted: 'text-[var(--color-muted-foreground)]',
+      primary: 'font-medium text-[var(--color-foreground)]',
     },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
 
 interface TableCellTextProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof tableCellTextVariants> {}
+  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof tableCellTextVariants> {}
 
-export function TableCellText({
-  className,
-  variant,
-  children,
-  ...props
-}: TableCellTextProps) {
+export function TableCellText({ className, variant, children, ...props }: TableCellTextProps) {
   return (
-    <span
-      className={cn(tableCellTextVariants({ variant, className }))}
-      {...props}
-    >
+    <span className={cn(tableCellTextVariants({ variant, className }))} {...props}>
       {children}
     </span>
-  );
+  )
 }
 
 // ============================================
 // TableActions (right-aligned actions cell)
 // ============================================
 
-interface TableActionsProps extends React.TdHTMLAttributes<HTMLTableCellElement> {}
+type TableActionsProps = React.TdHTMLAttributes<HTMLTableCellElement>
 
 export function TableActions({ className, children, ...props }: TableActionsProps) {
   return (
-    <td
-      className={cn('px-4 py-3 text-right', className)}
-      {...props}
-    >
+    <td className={cn('px-4 py-3 text-right', className)} {...props}>
       <div className="flex items-center justify-end gap-2">{children}</div>
     </td>
-  );
+  )
 }
