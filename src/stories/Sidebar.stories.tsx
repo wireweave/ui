@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   SidebarProvider,
   Sidebar,
@@ -9,8 +9,8 @@ import {
   SidebarFooter,
   SidebarUser,
   SidebarMain,
-} from '../components/sidebar';
-import { ThemeProvider, ThemeToggle } from '../components/theme';
+} from '../components/sidebar'
+import { ThemeProvider, ThemeToggle } from '../components/theme'
 import {
   Home,
   FolderOpen,
@@ -20,7 +20,7 @@ import {
   CreditCard,
   Settings,
   LogOut,
-} from 'lucide-react';
+} from 'lucide-react'
 
 /**
  * Storybook toolbar 의 라이트/다크 토글로 사이드바가 페이지 배경 반대 톤으로 인버전 되는지 확인할 수 있다.
@@ -38,9 +38,9 @@ const meta: Meta = {
       </ThemeProvider>
     ),
   ],
-};
+}
 
-export default meta;
+export default meta
 
 const navItems = (
   <>
@@ -72,13 +72,13 @@ const navItems = (
       </SidebarItem>
     </SidebarSection>
   </>
-);
+)
 
 const Frame = ({ children }: { children: React.ReactNode }) => (
   <div className="flex h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
     {children}
   </div>
-);
+)
 
 export const Default: StoryObj = {
   render: () => (
@@ -99,21 +99,21 @@ export const Default: StoryObj = {
             <h1 className="text-xl font-semibold">Main Content</h1>
             <ThemeToggle withSystem />
           </header>
-          <div className="p-8 space-y-4">
+          <div className="space-y-4 p-8">
             <p className="text-[var(--color-muted-foreground)]">
-              Storybook 의 Light/Dark 토글로 페이지 배경을 바꿔보세요. 사이드바 톤이 자동으로
-              반대 방향으로 인버전됩니다 (라이트 페이지 → 다크 사이드바, 다크 페이지 → 라이트 사이드바).
+              Storybook 의 Light/Dark 토글로 페이지 배경을 바꿔보세요. 사이드바 톤이 자동으로 반대
+              방향으로 인버전됩니다 (라이트 페이지 → 다크 사이드바, 다크 페이지 → 라이트 사이드바).
             </p>
-            <div className="grid grid-cols-2 gap-4 max-w-2xl">
+            <div className="grid max-w-2xl grid-cols-2 gap-4">
               <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
                 <p className="text-sm font-medium">Card</p>
-                <p className="text-xs text-[var(--color-muted-foreground)] mt-1">
+                <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
                   bg-[var(--color-card)] / border-[var(--color-border)]
                 </p>
               </div>
               <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)] p-4">
                 <p className="text-sm font-medium">Muted</p>
-                <p className="text-xs text-[var(--color-muted-foreground)] mt-1">
+                <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
                   bg-[var(--color-muted)]
                 </p>
               </div>
@@ -123,7 +123,7 @@ export const Default: StoryObj = {
       </Frame>
     </SidebarProvider>
   ),
-};
+}
 
 export const Collapsed: StoryObj = {
   render: () => (
@@ -161,7 +161,7 @@ export const Collapsed: StoryObj = {
       </Frame>
     </SidebarProvider>
   ),
-};
+}
 
 export const WithAvatar: StoryObj = {
   render: () => (
@@ -198,4 +198,4 @@ export const WithAvatar: StoryObj = {
       </Frame>
     </SidebarProvider>
   ),
-};
+}
