@@ -1,0 +1,12 @@
+dist
+build
+node_modules
+.next
+.turbo
+.cache
+coverage
+storybook-static
+pnpm-lock.yaml
+*.generated.*
+.eslintcache
+.agent-deck
