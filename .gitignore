@@ -9,3 +9,7 @@ storybook-static
 .turbo
 tsconfig.tsbuildinfo
 coverage
+.local/
+.playwright-mcp/
+.eslintcache
+.agent-deck/
