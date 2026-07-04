@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { cn } from '../lib/utils';
-import { Label } from './label';
-import { Input, type InputProps } from './input';
-import { Textarea, type TextareaProps } from './textarea';
+import * as React from 'react'
+import { cn } from '../lib/utils'
+import { Label } from './label'
+import { Input, type InputProps } from './input'
+import { Textarea, type TextareaProps } from './textarea'
 
 /**
  * Wireweave UI Form Components
@@ -12,10 +12,10 @@ import { Textarea, type TextareaProps } from './textarea';
  */
 
 interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
-  label?: string;
-  description?: string;
-  error?: string;
-  required?: boolean;
+  label?: string
+  description?: string
+  error?: string
+  required?: boolean
 }
 
 export function FormField({
@@ -32,7 +32,7 @@ export function FormField({
       {label && (
         <Label className="text-sm font-medium text-[var(--color-foreground)]">
           {label}
-          {required && <span className="text-[var(--color-destructive)] ml-1">*</span>}
+          {required && <span className="ml-1 text-[var(--color-destructive)]">*</span>}
         </Label>
       )}
       {children}
@@ -41,15 +41,15 @@ export function FormField({
       )}
       {error && <p className="text-sm text-[var(--color-destructive)]">{error}</p>}
     </div>
-  );
+  )
 }
 
 interface FormInputProps extends InputProps {
-  label?: string;
-  description?: string;
-  error?: string;
-  required?: boolean;
-  wrapperClassName?: string;
+  label?: string
+  description?: string
+  error?: string
+  required?: boolean
+  wrapperClassName?: string
 }
 
 export function FormInput({
@@ -71,21 +71,22 @@ export function FormInput({
     >
       <Input
         className={cn(
-          error && 'border-[var(--color-destructive)]/40 focus:border-[var(--color-destructive)] focus:ring-[var(--color-destructive)]/10',
-          className
+          error &&
+            'border-[var(--color-destructive)]/40 focus:border-[var(--color-destructive)] focus:ring-[var(--color-destructive)]/10',
+          className,
         )}
         {...props}
       />
     </FormField>
-  );
+  )
 }
 
 interface FormTextareaProps extends TextareaProps {
-  label?: string;
-  description?: string;
-  error?: string;
-  required?: boolean;
-  wrapperClassName?: string;
+  label?: string
+  description?: string
+  error?: string
+  required?: boolean
+  wrapperClassName?: string
 }
 
 export function FormTextarea({
@@ -107,18 +108,19 @@ export function FormTextarea({
     >
       <Textarea
         className={cn(
-          error && 'border-[var(--color-destructive)]/40 focus:border-[var(--color-destructive)] focus:ring-[var(--color-destructive)]/10',
-          className
+          error &&
+            'border-[var(--color-destructive)]/40 focus:border-[var(--color-destructive)] focus:ring-[var(--color-destructive)]/10',
+          className,
         )}
         {...props}
       />
     </FormField>
-  );
+  )
 }
 
 interface InputWithIconProps extends InputProps {
-  icon?: React.ComponentType<{ className?: string }>;
-  iconPosition?: 'left' | 'right';
+  icon?: React.ComponentType<{ className?: string }>
+  iconPosition?: 'left' | 'right'
 }
 
 export function InputWithIcon({
@@ -128,7 +130,7 @@ export function InputWithIcon({
   ...props
 }: InputWithIconProps) {
   if (!Icon) {
-    return <Input className={className} {...props} />;
+    return <Input className={className} {...props} />
   }
 
   return (
@@ -143,7 +145,7 @@ export function InputWithIcon({
         className={cn(
           iconPosition === 'left' && 'pl-10',
           iconPosition === 'right' && 'pr-10',
-          className
+          className,
         )}
         {...props}
       />
@@ -154,23 +156,18 @@ export function InputWithIcon({
         </div>
       )}
     </div>
-  );
+  )
 }
 
 interface SearchInputProps extends Omit<InputProps, 'type'> {
-  onSearch?: (value: string) => void;
+  onSearch?: (value: string) => void
 }
 
-export function SearchInput({
-  className,
-  onSearch,
-  onChange,
-  ...props
-}: SearchInputProps) {
+export function SearchInput({ className, onSearch, onChange, ...props }: SearchInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-    onSearch?.(e.target.value);
-  };
+    onChange?.(e)
+    onSearch?.(e.target.value)
+  }
 
   return (
     <div className="relative">
@@ -189,12 +186,7 @@ export function SearchInput({
           />
         </svg>
       </div>
-      <Input
-        type="search"
-        className={cn('pl-10', className)}
-        onChange={handleChange}
-        {...props}
-      />
+      <Input type="search" className={cn('pl-10', className)} onChange={handleChange} {...props} />
     </div>
-  );
+  )
 }
