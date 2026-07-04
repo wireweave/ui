@@ -1,33 +1,39 @@
-import type { Preview, Decorator } from '@storybook/react';
-import React from 'react';
-import '../src/styles/index.css';
+import type { Preview, Decorator } from '@storybook/react'
+import React from 'react'
+import '../src/styles/index.css'
 
-const withTheme: Decorator = (Story, context) => {
-  const theme = context.globals.theme as 'light' | 'dark';
+// The hook lives in a real PascalCase component so react-hooks/rules-of-hooks
+// recognizes it as a component (Storybook decorators are render functions but
+// are invoked as components in the React tree).
+const ThemeDecorator: React.FC<{ theme: 'light' | 'dark'; Story: React.ComponentType }> = ({
+  theme,
+  Story,
+}) => {
   React.useEffect(() => {
-    const root = document.documentElement;
+    const root = document.documentElement
     if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
+      root.classList.add('dark')
+      root.classList.remove('light')
     } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
+      root.classList.add('light')
+      root.classList.remove('dark')
     }
-    document.body.style.background =
-      theme === 'dark' ? 'var(--color-background)' : 'var(--color-background)';
-  }, [theme]);
+    document.body.style.background = 'var(--color-background)'
+  }, [theme])
 
   return React.createElement(
     'div',
     {
-      className:
-        theme === 'dark'
-          ? 'dark min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] p-6'
-          : 'light min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] p-6',
+      className: `${theme} min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] p-6`,
     },
-    React.createElement(Story, null)
-  );
-};
+    React.createElement(Story, null),
+  )
+}
+
+const withTheme: Decorator = (Story, context) => {
+  const theme = context.globals.theme as 'light' | 'dark'
+  return React.createElement(ThemeDecorator, { theme, Story })
+}
 
 const preview: Preview = {
   globalTypes: {
@@ -57,6 +63,6 @@ const preview: Preview = {
     layout: 'fullscreen',
   },
   decorators: [withTheme],
-};
+}
 
-export default preview;
+export default preview
