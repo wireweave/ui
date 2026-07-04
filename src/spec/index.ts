@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 /**
  * @wireweave/ui/spec — opt-in "specification document" ornament components.
@@ -11,5 +11,5 @@
  * Dashboard chrome and admin SHOULD NOT import this entry.
  */
 
-export { SpecStrip } from './spec-strip';
-export type { SpecStatus } from './spec-strip';
+export { SpecStrip } from './spec-strip'
+export type { SpecStatus } from './spec-strip'

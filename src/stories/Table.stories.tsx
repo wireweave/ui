@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   Table,
   TableHeader,
@@ -8,10 +8,10 @@ import {
   TableCell,
   TableCellText,
   TableActions,
-} from '../components/table';
-import { Badge } from '../components/badge';
-import { Button } from '../components/button';
-import { Trash2, Edit2, MoreHorizontal, Key } from 'lucide-react';
+} from '../components/table'
+import { Badge } from '../components/badge'
+import { Button } from '../components/button'
+import { Trash2, Edit2, MoreHorizontal, Key } from 'lucide-react'
 
 const meta: Meta = {
   title: 'Data Display/Table',
@@ -25,15 +25,39 @@ const meta: Meta = {
       </div>
     ),
   ],
-};
+}
 
-export default meta;
+export default meta
 
 const apiKeys = [
-  { id: '1', name: 'Production API', keyPrefix: 'sk-prod-****', tier: 'pro', status: 'active', created: 'Jan 15, 2024', lastUsed: '2 hours ago' },
-  { id: '2', name: 'Development API', keyPrefix: 'sk-dev-****', tier: 'free', status: 'active', created: 'Jan 10, 2024', lastUsed: 'Yesterday' },
-  { id: '3', name: 'Test API Key', keyPrefix: 'sk-test-****', tier: 'basic', status: 'revoked', created: 'Dec 20, 2023', lastUsed: 'Never' },
-];
+  {
+    id: '1',
+    name: 'Production API',
+    keyPrefix: 'sk-prod-****',
+    tier: 'pro',
+    status: 'active',
+    created: 'Jan 15, 2024',
+    lastUsed: '2 hours ago',
+  },
+  {
+    id: '2',
+    name: 'Development API',
+    keyPrefix: 'sk-dev-****',
+    tier: 'free',
+    status: 'active',
+    created: 'Jan 10, 2024',
+    lastUsed: 'Yesterday',
+  },
+  {
+    id: '3',
+    name: 'Test API Key',
+    keyPrefix: 'sk-test-****',
+    tier: 'basic',
+    status: 'revoked',
+    created: 'Dec 20, 2023',
+    lastUsed: 'Never',
+  },
+]
 
 export const Default: StoryObj = {
   render: () => (
@@ -64,7 +88,11 @@ export const Default: StoryObj = {
               </code>
             </TableCell>
             <TableCell>
-              <Badge variant={key.tier === 'pro' ? 'default' : key.tier === 'basic' ? 'secondary' : 'outline'}>
+              <Badge
+                variant={
+                  key.tier === 'pro' ? 'default' : key.tier === 'basic' ? 'secondary' : 'outline'
+                }
+              >
                 {key.tier}
               </Badge>
             </TableCell>
@@ -91,13 +119,13 @@ export const Default: StoryObj = {
       </TableBody>
     </Table>
   ),
-};
+}
 
 const users = [
   { id: '1', name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'active' },
   { id: '2', name: 'Jane Smith', email: 'jane@example.com', role: 'Editor', status: 'active' },
   { id: '3', name: 'Bob Johnson', email: 'bob@example.com', role: 'Viewer', status: 'inactive' },
-];
+]
 
 export const UsersTable: StoryObj = {
   render: () => (
@@ -140,7 +168,7 @@ export const UsersTable: StoryObj = {
       </TableBody>
     </Table>
   ),
-};
+}
 
 export const SimpleTable: StoryObj = {
   render: () => (
@@ -154,21 +182,39 @@ export const SimpleTable: StoryObj = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell><TableCellText variant="primary">Widget A</TableCellText></TableCell>
-          <TableCell><TableCellText>$19.99</TableCellText></TableCell>
-          <TableCell><TableCellText variant="muted">In Stock</TableCellText></TableCell>
+          <TableCell>
+            <TableCellText variant="primary">Widget A</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText>$19.99</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText variant="muted">In Stock</TableCellText>
+          </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell><TableCellText variant="primary">Widget B</TableCellText></TableCell>
-          <TableCell><TableCellText>$29.99</TableCellText></TableCell>
-          <TableCell><TableCellText variant="muted">Low Stock</TableCellText></TableCell>
+          <TableCell>
+            <TableCellText variant="primary">Widget B</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText>$29.99</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText variant="muted">Low Stock</TableCellText>
+          </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell><TableCellText variant="primary">Widget C</TableCellText></TableCell>
-          <TableCell><TableCellText>$39.99</TableCellText></TableCell>
-          <TableCell><TableCellText variant="muted">Out of Stock</TableCellText></TableCell>
+          <TableCell>
+            <TableCellText variant="primary">Widget C</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText>$39.99</TableCellText>
+          </TableCell>
+          <TableCell>
+            <TableCellText variant="muted">Out of Stock</TableCellText>
+          </TableCell>
         </TableRow>
       </TableBody>
     </Table>
   ),
-};
+}
