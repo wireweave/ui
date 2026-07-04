@@ -57,10 +57,28 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx release-it --ci
 
-      - name: Sync main to develop
+      - name: Sync release to develop (auto PR + merge)
         if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[skip ci]')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git fetch origin develop
-          git checkout develop
-          git merge main --strategy-option theirs -m "chore: sync release from main [skip ci]"
-          git push origin develop
+          set -euo pipefail
+          BRANCH="chore/sync-release-to-develop"
+          git fetch origin develop main
+          git checkout -B "$BRANCH" origin/develop
+          # main 을 정본으로 자동 해결 (version / CHANGELOG)
+          git merge origin/main -X theirs --no-edit \
+            -m "chore: sync release to develop [skip ci]"
+          git push --force-with-lease origin "$BRANCH"
+          # 동기화 PR (존재하면 재사용)
+          if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            gh pr create \
+              --base develop --head "$BRANCH" \
+              --title "chore: sync release to develop [skip ci]" \
+              --body "Automated sync of version bump and CHANGELOG from \`main\` after release. Merged automatically with \`[skip ci]\` to prevent re-publish on \`develop\`."
+          fi
+          # 자동 머지 — 커밋 메시지에 [skip ci] 포함되어 develop 재배포 차단
+          gh pr merge "$BRANCH" \
+            --merge --delete-branch \
+            --subject "chore: sync release to develop [skip ci]" \
+            --body "Auto-merged by publish.yml after main release."
