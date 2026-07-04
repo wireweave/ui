@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../lib/utils';
+import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '../lib/utils'
 
 /**
  * Wireweave UI Input
@@ -27,11 +27,12 @@ const inputVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
-);
+  },
+)
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -43,9 +44,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-    );
-  }
-);
-Input.displayName = 'Input';
+    )
+  },
+)
+Input.displayName = 'Input'
 
-export { Input, inputVariants };
+export { Input, inputVariants }
