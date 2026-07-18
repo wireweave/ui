@@ -50,8 +50,9 @@ const TabsTrigger = React.forwardRef<
       'data-[state=active]:text-primary relative',
       'after:absolute after:right-0 after:bottom-[-1px] after:left-0 after:h-0.5 after:bg-transparent after:transition-colors',
       'data-[state=active]:after:bg-primary',
-      // focus
-      'focus-visible:outline-none',
+      // focus — WCAG 2.4.7: `outline-none` alone removed the only visible focus
+      // indicator for keyboard users. Replace with an inset semantic ring.
+      'focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:outline-none focus-visible:ring-inset',
       // disabled
       'disabled:pointer-events-none disabled:opacity-50',
       className,

@@ -124,9 +124,12 @@
   --color-popover: var(--color-white);
   --color-popover-foreground: var(--color-slate-900);
 
-  /* ---- Primary ---- */
-  --color-primary: var(--color-blue-500);
-  --color-primary-hover: var(--color-blue-600);
+  /* ---- Primary ----
+     WCAG 2.2 AA (1.4.3): primary-foreground(white) on blue-500 = 3.68:1 (FAIL, body 4.5:1).
+     blue-600 = 5.17:1 (PASS). Also lifts outline/link/tab-active text (blue on page)
+     from 3.5:1 to 4.9:1 and outline hover (blue on accent) to 4.75:1. */
+  --color-primary: var(--color-blue-600);
+  --color-primary-hover: var(--color-blue-700);
   --color-primary-foreground: var(--color-white);
 
   /* ---- Secondary ---- */
@@ -142,14 +145,20 @@
   --color-accent: var(--color-blue-50);
   --color-accent-foreground: var(--color-slate-900);
 
-  /* ---- Destructive ---- */
-  --color-destructive: var(--color-red-500);
-  --color-destructive-hover: var(--color-red-600);
+  /* ---- Destructive ----
+     WCAG 2.2 AA: white on red-500 = 3.76:1 (FAIL); also destructive-as-text
+     (form error message, required asterisk) red-500 on page = 3.76:1 (FAIL).
+     red-600 = 4.83:1 (PASS) for both button fill and error text. */
+  --color-destructive: var(--color-red-600);
+  --color-destructive-hover: var(--color-red-700);
   --color-destructive-foreground: var(--color-white);
 
-  /* ---- Success ---- */
-  --color-success: var(--color-green-500);
-  --color-success-hover: var(--color-green-600);
+  /* ---- Success ----
+     WCAG 2.2 AA: white on green-500 = 2.28:1 (FAIL, unreadable). White on green
+     needs green-700 (5.02:1). Token consumed only by the success button; no
+     other component uses --color-success as text/border. */
+  --color-success: var(--color-green-700);
+  --color-success-hover: var(--color-green-800);
   --color-success-foreground: var(--color-white);
 
   /* ---- Warning ---- */

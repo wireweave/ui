@@ -17,22 +17,22 @@ Wireweave 디자인시스템 단일 소스. dashboard / admin / 기타 wireweave
 1. **팔레트 변수 (고정값)** — `--color-slate-{50..950}`, `--color-blue-{50..900}`, `--color-green-…`, `--color-red-…`, `--color-yellow-…`, `--color-purple-…`, `--color-orange-…`, `--color-white`, `--color-black`
 2. **시맨틱 변수 (팔레트 참조)** — 컴포넌트가 사용하는 의미 기반 토큰
 
-| 시맨틱 토큰                | 라이트 매핑  | 용도             |
-| -------------------------- | ------------ | ---------------- |
-| `--color-background`       | `slate-50`   | 페이지 배경      |
-| `--color-foreground`       | `slate-900`  | 본문 텍스트      |
-| `--color-card`             | `white`      | 카드/패널 배경   |
-| `--color-primary`          | `blue-500`   | CTA, 시그니처    |
-| `--color-primary-hover`    | `blue-600`   | primary hover    |
-| `--color-secondary`        | `slate-100`  | 보조 버튼        |
-| `--color-muted`            | `slate-100`  | 비활성/배경 강조 |
-| `--color-muted-foreground` | `slate-500`  | 부가 텍스트      |
-| `--color-destructive`      | `red-500`    | 위험 액션        |
-| `--color-success`          | `green-500`  | 성공 시그널      |
-| `--color-warning`          | `yellow-500` | 경고 시그널      |
-| `--color-border`           | `slate-200`  | 구분선           |
-| `--color-input`            | `slate-200`  | 입력 보더        |
-| `--color-ring`             | `blue-500`   | focus 링         |
+| 시맨틱 토큰                | 라이트 매핑  | 용도                                              |
+| -------------------------- | ------------ | ------------------------------------------------- |
+| `--color-background`       | `slate-50`   | 페이지 배경                                       |
+| `--color-foreground`       | `slate-900`  | 본문 텍스트                                       |
+| `--color-card`             | `white`      | 카드/패널 배경                                    |
+| `--color-primary`          | `blue-600`   | CTA, 시그니처 (AA: white 텍스트 5.17:1)           |
+| `--color-primary-hover`    | `blue-700`   | primary hover                                     |
+| `--color-secondary`        | `slate-100`  | 보조 버튼                                         |
+| `--color-muted`            | `slate-100`  | 비활성/배경 강조                                  |
+| `--color-muted-foreground` | `slate-500`  | 부가 텍스트                                       |
+| `--color-destructive`      | `red-600`    | 위험 액션 (AA: white 4.83:1, error 텍스트 4.83:1) |
+| `--color-success`          | `green-700`  | 성공 시그널 (AA: white 5.02:1)                    |
+| `--color-warning`          | `yellow-500` | 경고 시그널                                       |
+| `--color-border`           | `slate-200`  | 구분선                                            |
+| `--color-input`            | `slate-200`  | 입력 보더                                         |
+| `--color-ring`             | `blue-500`   | focus 링                                          |
 
 ### Sidebar 토큰 (페이지 배경 ↔ 사이드바 인버전)
 

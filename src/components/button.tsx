@@ -27,8 +27,13 @@ const buttonVariants = cva(
           'bg-[var(--color-destructive)] text-[var(--color-destructive-foreground)] border border-[var(--color-destructive)] hover:bg-[var(--color-destructive-hover)]',
         destructive:
           'bg-[var(--color-destructive)] text-[var(--color-destructive-foreground)] border border-[var(--color-destructive)] hover:bg-[var(--color-destructive-hover)]',
+        // Reported a11y defect: outline hover tinted the background toward the
+        // same hue as its text (blue text on blue-tinted `accent`) so foreground
+        // contrast dropped below AA (light 3.38:1, dark 4.07:1). Fill solid on
+        // hover and flip text to primary-foreground — the fg now moves with the
+        // bg (WCAG 1.4.3: 5.17:1 light / 7.02:1 dark).
         outline:
-          'bg-transparent text-[var(--color-primary)] border border-[var(--color-primary)] hover:bg-[var(--color-accent)]',
+          'bg-transparent text-[var(--color-primary)] border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)]',
         secondary:
           'bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] border border-[var(--color-border)] hover:bg-[var(--color-secondary-hover)]',
         ghost:
