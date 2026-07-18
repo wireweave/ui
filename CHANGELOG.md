@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.0-beta.1](https://github.com/wireweave/ui/compare/v0.5.0-beta.0...v0.5.0-beta.1) (2026-07-18)
+
+### Bug Fixes
+
+- **a11y:** correct interactive-state contrast to WCAG 2.2 AA (light theme) ([accb94a](https://github.com/wireweave/ui/commit/accb94a8ab8ce4db596ae8ac08115e0cdea08ead))
+
 ## [0.5.0-beta.0](https://github.com/wireweave/ui/compare/v0.4.1-beta.0...v0.5.0-beta.0) (2026-07-04)
 
 ### Features
